@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Vehicle {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String registration;
