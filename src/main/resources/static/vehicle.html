@@ -22,7 +22,77 @@
         <main>
             <h1>Vehicles</h1>
 
-            <a class="btn btn-success" href="createvehicle.html" role="button">Add Vehicle</a>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createVehicleModal">
+                Add Vehicle
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="createVehicleModal" tabindex="-1" aria-labelledby="createVehicleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createVehicleModalLabel">Create Vehicle</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="createVehicleForm" class="needs-validation" novalidate="">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="registration" class="form-label">Registration</label>
+                                        <input type="text" class="form-control" id="registration" placeholder="CU57ABC"
+                                            value="" required="">
+                                        <div class="invalid-feedback">
+                                            Valid vehicle registration is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="make" class="form-label">Vehicle Make</label>
+                                        <input type="text" class="form-control" id="make" placeholder="" value=""
+                                            required="">
+                                        <div class="invalid-feedback">
+                                            Valid vehicle make is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="model" class="form-label">Vehicle Model</label>
+                                        <input type="text" class="form-control" id="model" placeholder="" value=""
+                                            required="">
+                                        <div class="invalid-feedback">
+                                            Valid vehicle model is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="colour" class="form-label">Vehicle Colour</label>
+                                        <input type="text" class="form-control" id="colour" placeholder="" value=""
+                                            required="">
+                                        <div class="invalid-feedback">
+                                            Valid vehicle colour is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="horsePower" class="form-label">Vehicle Horse Power</label>
+                                        <input type="number" class="form-control" id="horsePower" placeholder=""
+                                            value="" required="">
+                                        <div class="invalid-feedback">
+                                            Valid vehicle horse power is required.
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" form="createVehicleForm" class="btn btn-primary">Create new
+                                vehicle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </main>
         <footer class="pt-5 my-5 text-muted border-top">
@@ -33,6 +103,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="form-validation.js"></script>
+    <script src="vehicle.js"></script>
 </body>
 
 </html>
