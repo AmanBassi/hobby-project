@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.hobbyproject.domain.Vehicle;
+import com.qa.hobbyproject.dto.VehicleDTO;
 import com.qa.hobbyproject.service.VehicleService;
 
 @RestController
@@ -17,7 +18,7 @@ public class VehicleController {
 	
 	// Create
 	@PostMapping("/create")
-	public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
+	public VehicleDTO addVehicle(@RequestBody Vehicle vehicle) {
 		return this.service.addVehicle(vehicle);
 	}
 }
