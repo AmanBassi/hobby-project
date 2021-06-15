@@ -26,7 +26,7 @@ public class VehicleController {
 	}
 
 	// Read
-	@GetMapping("/")
+	@GetMapping("/getAll")
 	public List<VehicleDTO> getAll() {
 		return this.service.getVehicles();
 	}
