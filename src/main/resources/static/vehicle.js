@@ -1,4 +1,40 @@
 (function () {
+
+    const tableBody = document.querySelector("tbody");
+
+    const getVehicles = async () => {
+        const vehicles = await axios.get("/getAll");
+        vehicles.data.forEach(vehicle => {
+            renderVehicle(vehicle)
+        });
+    }
+
+    const renderVehicle = vehicle => {
+        const tableRow = document.createElement("tr");
+
+        createTableCell(tableRow, vehicle.id);
+
+        createTableCell(tableRow, vehicle.registration);
+
+        createTableCell(tableRow, vehicle.make);
+
+        createTableCell(tableRow, vehicle.model);
+
+        createTableCell(tableRow, vehicle.colour);
+
+        createTableCell(tableRow, vehicle.horsePower);
+
+        tableBody.appendChild(tableRow);
+    }
+
+    const createTableCell = (tableRow, data) => {
+        const cell = document.createElement("td");
+        cell.innerText = data;
+        tableRow.appendChild(cell);
+    }
+
+    getVehicles();
+
     document.getElementById("createVehicleForm").addEventListener("submit", function (event) {
         if (!this.checkValidity()) {
             event.preventDefault();
@@ -20,8 +56,8 @@
         axios.post("/create", data)
             .then(function (response) {
                 console.log(response);
-                var myModalEl = document.getElementById('exampleModal');
-                var modal = bootstrap.Modal.getInstance(myModalEl);
+                var myModalElement = document.getElementById('exampleModal');
+                var modal = bootstrap.Modal.getInstance(myModalElement);
                 modal.hide();
                 document.getElementById("createVehicleForm").classList.remove('was-validated');
             })
