@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -16,7 +17,6 @@ import org.springframework.test.context.ActiveProfiles;
 import com.qa.hobbyproject.domain.Vehicle;
 import com.qa.hobbyproject.dto.VehicleDTO;
 import com.qa.hobbyproject.repository.VehicleRepository;
-import com.qa.hobbyproject.utils.VehicleMapper;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -29,7 +29,7 @@ class VehicleServiceTest {
 	private VehicleRepository repository;
 
 	@MockBean
-	private VehicleMapper mapper;
+	private ModelMapper mapper;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -57,13 +57,13 @@ class VehicleServiceTest {
 		
 		// WHEN
 		Mockito.when(this.repository.save(vehicle)).thenReturn(createdVehicle);
-		Mockito.when(this.mapper.mapToDTO(createdVehicle)).thenReturn(savedVehicle);
+		Mockito.when(this.mapper.map(createdVehicle,VehicleDTO.class)).thenReturn(savedVehicle);
 		
 		// THEN
 		assertThat(this.service.addVehicle(vehicle)).isEqualTo(savedVehicle);
 
 		Mockito.verify(this.repository, Mockito.times(1)).save(vehicle);
-		Mockito.verify(this.mapper, Mockito.times(1)).mapToDTO(createdVehicle);
+		Mockito.verify(this.mapper, Mockito.times(1)).map(createdVehicle,VehicleDTO.class);
 	}
 
 }
