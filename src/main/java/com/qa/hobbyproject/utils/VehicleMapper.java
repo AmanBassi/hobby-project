@@ -13,6 +13,7 @@ public class VehicleMapper implements Mapper<Vehicle, VehicleDTO> {
 		VehicleDTO dto = new VehicleDTO();
 		
 		dto.setId(vehicle.getId());
+		dto.setRegistration(vehicle.getRegistration());
 		dto.setMake(vehicle.getMake());
 		dto.setModel(vehicle.getModel());
 		dto.setColour(vehicle.getColour());

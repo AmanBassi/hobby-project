@@ -49,10 +49,11 @@ class VehicleServiceTest {
 
 	@Test
 	void testAddVehicle() {
-		// GIVEN
-		Vehicle vehicle = new Vehicle("FE65 PKK", "VW", "Golf", "Black", 220);
 		Vehicle createdVehicle = new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
 		VehicleDTO savedVehicle = new VehicleDTO(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
+		
+		// GIVEN
+		Vehicle vehicle = new Vehicle("FE65 PKK", "VW", "Golf", "Black", 220);
 		
 		// WHEN
 		Mockito.when(this.repository.save(vehicle)).thenReturn(createdVehicle);
