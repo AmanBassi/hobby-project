@@ -3,7 +3,7 @@
     const getVehicles = async () => {
         const tableBody = document.querySelector("tbody");
         tableBody.innerHTML = "";
-        const vehicles = await axios.get("/getAll");
+        const vehicles = await axios.get("/vehicle/getAll");
         vehicles.data.forEach(vehicle => {
             renderVehicle(vehicle)
         });
@@ -73,7 +73,7 @@
     getVehicles();
 
     const deleteVehicle = async (id) => {
-        const result = await axios.delete(`/delete/${id}`);
+        const result = await axios.delete(`/vehicle/delete/${id}`);
         getVehicles();
     }
 
@@ -95,7 +95,7 @@
             horsePower: this.horsePower.value
         }
 
-        axios.post("/create", data)
+        axios.post("/vehicle/create", data)
             .then(function (response) {
                 console.log(response);
             })
@@ -124,7 +124,7 @@
             horsePower: this.updateHorsePower.value
         }
 
-        axios.put(`/update/${vehicleId}`, data)
+        axios.put(`/vehicle/update/${vehicleId}`, data)
             .then(function (response) {
                 console.log(response);
             })

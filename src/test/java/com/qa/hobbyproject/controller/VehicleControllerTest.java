@@ -67,7 +67,7 @@ class VehicleControllerTest {
 		String vehicleAsJSON = this.mapper.writeValueAsString(vehicle);
 		String createdVehicleAsJSON = this.mapper.writeValueAsString(createdVehicle);
 
-		RequestBuilder mockRequest = post("/create").content(vehicleAsJSON).contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder mockRequest = post("/vehicle/create").content(vehicleAsJSON).contentType(MediaType.APPLICATION_JSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
@@ -83,7 +83,7 @@ class VehicleControllerTest {
 		vehicles.add(vehicle);
 		String vehiclesAsJSON = this.mapper.writeValueAsString(vehicles);
 
-		RequestBuilder mockRequest = get("/getAll");
+		RequestBuilder mockRequest = get("/vehicle/getAll");
 
 		ResultMatcher checkStatus = status().isOk();
 
@@ -97,7 +97,7 @@ class VehicleControllerTest {
 		Vehicle vehicle = new Vehicle(1L, "BP14 NRE", "Suzuki", "Swift", "Grey", 90);
 		String vehicleAsJSON = this.mapper.writeValueAsString(vehicle);
 
-		RequestBuilder mockRequest = put("/update/1").contentType(MediaType.APPLICATION_JSON).content(vehicleAsJSON);
+		RequestBuilder mockRequest = put("/vehicle/update/1").contentType(MediaType.APPLICATION_JSON).content(vehicleAsJSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
@@ -108,7 +108,7 @@ class VehicleControllerTest {
 	
 	@Test
 	void testDeleteVehicle() throws Exception {
-		RequestBuilder mockRequest = delete("/delete/1");
+		RequestBuilder mockRequest = delete("/vehicle/delete/1");
 
 		ResultMatcher checkStatus = status().isOk();
 
