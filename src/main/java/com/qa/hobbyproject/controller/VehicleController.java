@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.hobbyproject.domain.Vehicle;
@@ -15,6 +16,7 @@ import com.qa.hobbyproject.dto.VehicleDTO;
 import com.qa.hobbyproject.service.VehicleService;
 
 @RestController
+@RequestMapping("/vehicle")
 public class VehicleController {
 	private VehicleService service;
 
