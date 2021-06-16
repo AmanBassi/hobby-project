@@ -3,7 +3,9 @@ package com.qa.hobbyproject.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +31,11 @@ public class VehicleController {
 	@GetMapping("/getAll")
 	public List<VehicleDTO> getAll() {
 		return this.service.getVehicles();
+	}
+	
+	// Update
+	@PutMapping("/update/{id}")
+	public VehicleDTO updateVehicle(@PathVariable long id, @RequestBody Vehicle vehicle) {
+		return this.service.updateVehicle(id, vehicle);
 	}
 }
