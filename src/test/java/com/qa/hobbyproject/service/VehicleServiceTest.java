@@ -123,4 +123,18 @@ class VehicleServiceTest {
 		Mockito.verify(this.mapper, Mockito.times(1)).map(updatedVehicle, VehicleDTO.class);
 	}
 
+	@Test
+	void testDeleteVehicle() {
+		// GIVEN
+		Long vehicleId = 1L;
+		
+		// WHEN
+		Mockito.when(this.repository.existsById(vehicleId)).thenReturn(false);
+		
+		// THEN
+		assertThat(this.service.deleteVehicle(vehicleId)).isEqualTo(true);
+		
+		Mockito.verify(this.repository, Mockito.times(1)).existsById(vehicleId);
+	}
+	
 }
