@@ -1,0 +1,1 @@
+insert into vehicle (id, registration, make, model, colour, horse_power) values (1, 'PB08 BSB', 'Porsche', 'Macan', 'Blue', 258)
