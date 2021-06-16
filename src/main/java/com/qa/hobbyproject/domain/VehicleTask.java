@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Task {
+public class VehicleTask {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -21,10 +21,10 @@ public class Task {
 	@ManyToOne
 	private Vehicle vehicle;
 
-	public Task() {
+	public VehicleTask() {
 	}
 
-	public Task(Long id, String name, LocalDate dueDate) {
+	public VehicleTask(Long id, String name, LocalDate dueDate) {
 		this.id = id;
 		this.name = name;
 		this.dueDate = dueDate;
@@ -77,7 +77,7 @@ public class Task {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Task other = (Task) obj;
+		VehicleTask other = (VehicleTask) obj;
 		if (dueDate == null) {
 			if (other.dueDate != null)
 				return false;
