@@ -1,8 +1,12 @@
 package com.qa.hobbyproject.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -15,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -24,6 +30,8 @@ import com.qa.hobbyproject.domain.Vehicle;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
+@Sql(scripts = { "classpath:sql-schema.sql",
+		"classpath:sql-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("test")
 class VehicleControllerTest {
 
@@ -52,7 +60,7 @@ class VehicleControllerTest {
 	@Test
 	void testAddVehicle() throws Exception {
 		Vehicle vehicle = new Vehicle("FE65 PKK", "VW", "Golf", "Black", 220);
-		Vehicle createdVehicle = new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
+		Vehicle createdVehicle = new Vehicle(2L, "FE65 PKK", "VW", "Golf", "Black", 220);
 
 		String vehicleAsJSON = this.mapper.writeValueAsString(vehicle);
 		String createdVehicleAsJSON = this.mapper.writeValueAsString(createdVehicle);
@@ -64,6 +72,22 @@ class VehicleControllerTest {
 		ResultMatcher checkBody = content().json(createdVehicleAsJSON);
 
 		mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
+	}
+
+	@Test
+	void testGetAll() throws Exception {
+		Vehicle vehicle = new Vehicle(1L, "PB08 BSB", "Porsche", "Macan", "Blue", 258);
+		List<Vehicle> vehicles = new ArrayList<>();
+		vehicles.add(vehicle);
+		String vehiclesAsJSON = this.mapper.writeValueAsString(vehicles);
+
+		RequestBuilder mockRequest = get("/getAll");
+
+		ResultMatcher checkStatus = status().isOk();
+
+		ResultMatcher checkBody = content().json(vehiclesAsJSON);
+
+		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 
 }
