@@ -45,4 +45,9 @@ public class VehicleService {
 
 		return this.mapper.map(updatedVehicle, VehicleDTO.class);
 	}
+	
+	public boolean deleteVehicle(Long id) {
+		this.repository.deleteById(id);
+		return !this.repository.existsById(id);
+	}
 }
