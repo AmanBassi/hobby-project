@@ -1,5 +1,6 @@
 package com.qa.hobbyproject.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -102,6 +103,17 @@ class VehicleControllerTest {
 
 		ResultMatcher checkBody = content().json(vehicleAsJSON);
 
+		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
+	}
+	
+	@Test
+	void testDeleteVehicle() throws Exception {
+		RequestBuilder mockRequest = delete("/delete/1");
+
+		ResultMatcher checkStatus = status().isOk();
+
+		ResultMatcher checkBody = content().string("true");
+		
 		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 

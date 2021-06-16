@@ -2,6 +2,7 @@ package com.qa.hobbyproject.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,13 @@ public class VehicleController {
 	
 	// Update
 	@PutMapping("/update/{id}")
-	public VehicleDTO updateVehicle(@PathVariable long id, @RequestBody Vehicle vehicle) {
+	public VehicleDTO updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
 		return this.service.updateVehicle(id, vehicle);
+	}
+	
+	// Delete
+	@DeleteMapping("/delete/{id}")
+	public boolean deleteVehicle(@PathVariable Long id) {
+		return this.service.deleteVehicle(id);
 	}
 }
