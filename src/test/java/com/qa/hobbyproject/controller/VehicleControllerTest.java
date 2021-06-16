@@ -2,6 +2,7 @@ package com.qa.hobbyproject.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -86,6 +87,20 @@ class VehicleControllerTest {
 		ResultMatcher checkStatus = status().isOk();
 
 		ResultMatcher checkBody = content().json(vehiclesAsJSON);
+
+		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
+	}
+
+	@Test
+	void testUpdateVehicle() throws Exception {
+		Vehicle vehicle = new Vehicle(1L, "BP14 NRE", "Suzuki", "Swift", "Grey", 90);
+		String vehicleAsJSON = this.mapper.writeValueAsString(vehicle);
+
+		RequestBuilder mockRequest = put("/update/1").contentType(MediaType.APPLICATION_JSON).content(vehicleAsJSON);
+
+		ResultMatcher checkStatus = status().isOk();
+
+		ResultMatcher checkBody = content().json(vehicleAsJSON);
 
 		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}

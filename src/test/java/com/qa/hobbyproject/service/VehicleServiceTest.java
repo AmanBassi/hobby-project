@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -99,6 +100,27 @@ class VehicleServiceTest {
 		Mockito.verify(this.repository, Mockito.times(1)).findAll();
 		Mockito.verify(this.mapper, Mockito.times(1)).map(vehicle1, VehicleDTO.class);
 		Mockito.verify(this.mapper, Mockito.times(1)).map(vehicle2, VehicleDTO.class);
+	}
+	
+	@Test
+	void testUpdateVehicle() {
+		// GIVEN
+		Vehicle existingVehicle = new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
+		Optional<Vehicle> optionalExistingVehicle = Optional.ofNullable(new Vehicle(1L, "AB15 JAT", "Volkswagen", "GTI", "White", 240));
+		Vehicle updatedVehicle = new Vehicle(1L, "AB15 JAT", "Volkswagen", "GTI", "White", 240);
+		VehicleDTO updatedVehicleDTO = new VehicleDTO(1L, "AB15 JAT", "Volkswagen", "GTI", "White", 240);
+		
+		// WHEN
+		Mockito.when(this.repository.findById(1L)).thenReturn(optionalExistingVehicle);
+		Mockito.when(this.repository.save(existingVehicle)).thenReturn(updatedVehicle);
+		Mockito.when(this.mapper.map(updatedVehicle, VehicleDTO.class)).thenReturn(updatedVehicleDTO);
+		
+		// THEN
+		assertThat(this.service.updateVehicle(1L, existingVehicle)).isEqualTo(updatedVehicleDTO);
+		
+		Mockito.verify(this.repository, Mockito.times(1)).findById(1L);
+		Mockito.verify(this.repository, Mockito.times(1)).save(existingVehicle);
+		Mockito.verify(this.mapper, Mockito.times(1)).map(updatedVehicle, VehicleDTO.class);
 	}
 
 }

@@ -3,6 +3,8 @@ package com.qa.hobbyproject.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,19 @@ public class VehicleService {
 	public List<VehicleDTO> getVehicles() {
 		return this.repository.findAll().stream().map(vehicle -> this.mapper.map(vehicle, VehicleDTO.class))
 				.collect(Collectors.toList());
+	}
+
+	public VehicleDTO updateVehicle(Long id, Vehicle vehicle) {
+		Vehicle existingVehicle = this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+
+		existingVehicle.setRegistration(vehicle.getRegistration());
+		existingVehicle.setMake(vehicle.getMake());
+		existingVehicle.setModel(vehicle.getModel());
+		existingVehicle.setColour(vehicle.getColour());
+		existingVehicle.setHorsePower(vehicle.getHorsePower());
+
+		Vehicle updatedVehicle = this.repository.save(existingVehicle);
+
+		return this.mapper.map(updatedVehicle, VehicleDTO.class);
 	}
 }
