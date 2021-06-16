@@ -1,33 +1,41 @@
 (function () {
 
-    const tableBody = document.querySelector("tbody");
-
     const getVehicles = async () => {
+        const tableBody = document.querySelector("tbody");
+        tableBody.innerHTML = "";
         const vehicles = await axios.get("/getAll");
         vehicles.data.forEach(vehicle => {
             renderVehicle(vehicle)
         });
     }
 
-    const updateVehicle = async (id, data) => {
-        const vehicle = await axios.put("/update/" + id, data);
-    }
-
     const renderVehicle = vehicle => {
+        const tableBody = document.querySelector("tbody");
+
         const tableRow = document.createElement("tr");
 
-        createTableCell(tableRow, vehicle.id);
+        tableRow.appendChild(createTableCell(vehicle.id));
+        tableRow.appendChild(createTableCell(vehicle.registration));
+        tableRow.appendChild(createTableCell(vehicle.make));
+        tableRow.appendChild(createTableCell(vehicle.model));
+        tableRow.appendChild(createTableCell(vehicle.colour));
+        tableRow.appendChild(createTableCell(vehicle.horsePower));
 
-        createTableCell(tableRow, vehicle.registration);
+        tableRow.appendChild(createUpdateButton(vehicle));
 
-        createTableCell(tableRow, vehicle.make);
+        tableRow.appendChild(createDeleteButton(vehicle.id));
 
-        createTableCell(tableRow, vehicle.model);
+        tableBody.appendChild(tableRow);
+    }
 
-        createTableCell(tableRow, vehicle.colour);
+    const createTableCell = (data) => {
+        const cell = document.createElement("td");
+        cell.innerText = data;
+        cell.className = "align-middle";
+        return cell;
+    }
 
-        createTableCell(tableRow, vehicle.horsePower);
-
+    const createUpdateButton = (vehicle) => {
         const cell = document.createElement("td");
         const updateButton = document.createElement("button");
         updateButton.innerText = "Update";
@@ -45,19 +53,29 @@
         });
 
         cell.appendChild(updateButton)
-        tableRow.appendChild(cell);
-
-        tableBody.appendChild(tableRow);
+        return cell;
     }
 
-    const createTableCell = (tableRow, data) => {
+    const createDeleteButton = (vehicleId) => {
         const cell = document.createElement("td");
-        cell.innerText = data;
-        cell.className = "align-middle";
-        tableRow.appendChild(cell);
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Delete";
+        deleteButton.className = "btn btn-danger";
+        deleteButton.setAttribute("type", "submit");
+        deleteButton.addEventListener("click", function () {
+            deleteVehicle(vehicleId);
+        });
+
+        cell.appendChild(deleteButton);
+        return cell;
     }
 
     getVehicles();
+
+    const deleteVehicle = async (id) => {
+        const result = await axios.delete(`/delete/${id}`);
+        getVehicles();
+    }
 
     document.getElementById("createVehicleForm").addEventListener("submit", function (event) {
         if (!this.checkValidity()) {
