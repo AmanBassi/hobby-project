@@ -14,15 +14,13 @@
 
         const tableRow = document.createElement("tr");
 
-        tableRow.appendChild(createTableCell(vehicle.id));
+        tableRow.appendChild(createOpenVehicleLink(vehicle.id));
         tableRow.appendChild(createTableCell(vehicle.registration));
         tableRow.appendChild(createTableCell(vehicle.make));
         tableRow.appendChild(createTableCell(vehicle.model));
         tableRow.appendChild(createTableCell(vehicle.colour));
         tableRow.appendChild(createTableCell(vehicle.horsePower));
-
         tableRow.appendChild(createUpdateButton(vehicle));
-
         tableRow.appendChild(createDeleteButton(vehicle.id));
 
         tableBody.appendChild(tableRow);
@@ -32,6 +30,17 @@
         const cell = document.createElement("td");
         cell.innerText = data;
         cell.className = "align-middle";
+        return cell;
+    }
+
+    const createOpenVehicleLink = (vehicleId) => {
+        const cell = document.createElement("td");
+        const openLink = document.createElement("a");
+        openLink.innerText = "Open";
+        openLink.className = "btn btn-success";
+        openLink.href = `task.html?id=${vehicleId}`
+
+        cell.appendChild(openLink)
         return cell;
     }
 
