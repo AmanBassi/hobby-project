@@ -19,7 +19,7 @@ import com.qa.hobbyproject.service.VehicleService;
 @RestController
 @RequestMapping("/vehicle")
 public class VehicleController {
-	
+
 	@Autowired
 	private VehicleService service;
 

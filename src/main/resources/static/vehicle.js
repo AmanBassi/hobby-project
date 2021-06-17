@@ -59,7 +59,7 @@
             document.getElementById("updateModel").value = vehicle.model;
             document.getElementById("updateColour").value = vehicle.colour;
             document.getElementById("updateHorsePower").value = vehicle.horsePower;
-            document.getElementById("updateVehicleButton").setAttribute("vehicle-id", vehicle.id);
+            document.getElementById("updateVehicleButton").setAttribute("vehicleId", vehicle.id);
         });
 
         cell.appendChild(updateButton)
@@ -125,7 +125,7 @@
         this.classList.add('was-validated')
         console.log("form was valid");
 
-        const vehicleId = document.getElementById("updateVehicleButton").getAttribute("vehicle-id");
+        const vehicleId = document.getElementById("updateVehicleButton").getAttribute("vehicleId");
         const data = {
             registration: this.updateRegistration.value,
             make: this.updateMake.value,

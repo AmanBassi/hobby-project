@@ -43,6 +43,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Task</th>
                             <th scope="col">Due Date</th>
+                            <th scope="col" class="w-0"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -95,7 +96,51 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal -->
+            <div class="modal fade" id="updateVehicleTaskModal" tabindex="-1"
+                aria-labelledby="updateVehicleTaskModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateVehicleTaskModalLabel">Update Task</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="updateVehicleTaskForm" class="needs-validation" novalidate="">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="name" class="form-label">Task</label>
+                                        <select class="form-select" aria-label="name" id="updateName" required="">
+                                            <option value="MOT">MOT</option>
+                                            <option value="Road Tax">Road Tax</option>
+                                            <option value="Insurance">Insurance</option>
+                                            <option value="Service">Service</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Valid vehicle task is required.
+                                        </div>
+                                    </div>
 
+                                    <div class="col-12">
+                                        <label for="dueDate" class="form-label">Task Due Date</label>
+                                        <input type="date" class="form-control" id="updateDueDate" placeholder=""
+                                            value="" required="">
+                                        <div class="invalid-feedback">
+                                            Valid task due date is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" id="updateVehicleTaskButton" form="updateVehicleTaskForm"
+                                class="btn btn-primary">Update
+                                task</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </main>
         <footer class="pt-5 my-5 text-muted border-top">
