@@ -3,6 +3,7 @@ package com.qa.hobbyproject.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,5 +43,11 @@ public class VehicleTaskController {
 	@PutMapping("/update/{id}")
 	public VehicleTaskDTO updateVehicleTask(@PathVariable Long id, @RequestBody VehicleTask task) {
 		return this.service.updateVehicleTask(id, task);
+	}
+
+	// Delete
+	@DeleteMapping("/delete/{id}")
+	public boolean deleteVehicleTask(@PathVariable Long id) {
+		return this.service.deleteVehicleTask(id);
 	}
 }
