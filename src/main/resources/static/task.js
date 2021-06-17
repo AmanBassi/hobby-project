@@ -16,4 +16,37 @@
 
     getVehicle();
 
+
+    document.getElementById("createVehicleTaskForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        if (!this.checkValidity()) {
+            event.stopPropagation();
+            console.log("form was not valid");
+            return;
+        }
+        this.classList.add('was-validated')
+        console.log("form was valid");
+
+        const data = {
+            name: this.name.value,
+            dueDate: this.dueDate.value,
+            vehicle: { id: 1 }
+        }
+
+        axios.post("/vehicletask/create", data)
+            .then(function (response) {
+                console.log(response);
+                var myModalElement = document.getElementById('createVehicleTaskModal');
+                var modal = bootstrap.Modal.getInstance(myModalElement);
+                modal.hide();
+
+                document.getElementById("createVehicleTaskForm").classList.remove('was-validated');
+                document.getElementById("createVehicleTaskForm").reset();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        console.log(this);
+    });
+
 })();

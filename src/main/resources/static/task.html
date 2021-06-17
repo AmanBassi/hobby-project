@@ -31,9 +31,55 @@
             <p>Horse Power: <span id="vehicleHorsePower" class="fw-bold"></span></p>
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createVehicleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#createVehicleTaskModal">
                 Add Task
             </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="createVehicleTaskModal" tabindex="-1"
+                aria-labelledby="createVehicleTaskModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createVehicleTaskModalLabel">Create Task</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="createVehicleTaskForm" class="needs-validation" novalidate="">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="name" class="form-label">Task</label>
+                                        <select class="form-select" aria-label="name" id="name" required="">
+                                            <option value="mot">MOT</option>
+                                            <option value="roadTax">Road Tax</option>
+                                            <option value="insurance">Insurance</option>
+                                            <option value="service">Service</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Valid vehicle task is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="dueDate" class="form-label">Task Due Date</label>
+                                        <input type="date" class="form-control" id="dueDate" placeholder="" value=""
+                                            required="">
+                                        <div class="invalid-feedback">
+                                            Valid task due date is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" form="createVehicleTaskForm" class="btn btn-primary">Create new
+                                task</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
         </main>
