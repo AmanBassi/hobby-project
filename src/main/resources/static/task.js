@@ -27,6 +27,11 @@
         });
     }
 
+    const deleteTask = async (id) => {
+        const result = await axios.delete(`/vehicletask/delete/${id}`);
+        getTasks(vehicleId);
+    }
+
     const createTableCell = (data) => {
         const cell = document.createElement("td");
         cell.innerText = data;
@@ -52,6 +57,20 @@
         return cell;
     }
 
+    const createDeleteButton = (taskId) => {
+        const cell = document.createElement("td");
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Delete";
+        deleteButton.className = "btn btn-danger";
+        deleteButton.setAttribute("type", "submit");
+        deleteButton.addEventListener("click", function () {
+            deleteTask(taskId);
+        });
+
+        cell.appendChild(deleteButton);
+        return cell;
+    }
+
     const renderTask = task => {
         const tableBody = document.querySelector("tbody");
 
@@ -61,6 +80,7 @@
         tableRow.appendChild(createTableCell(task.name));
         tableRow.appendChild(createTableCell(task.dueDate));
         tableRow.appendChild(createUpdateButton(task));
+        tableRow.appendChild(createDeleteButton(task.id));
 
         tableBody.appendChild(tableRow);
     }
