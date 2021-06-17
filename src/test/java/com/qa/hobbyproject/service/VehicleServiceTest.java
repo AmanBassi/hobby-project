@@ -109,6 +109,20 @@ class VehicleServiceTest {
 	}
 
 	@Test
+	void testGetVehicleById() {
+		Optional<Vehicle> optionalVehicle = Optional.ofNullable(new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220));
+		Vehicle foundVehicle = new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
+		VehicleDTO vehicleDTO = new VehicleDTO(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
+		// GIVEN
+		Long id = 1L;
+		// WHEN
+		Mockito.when(this.repository.findById(id)).thenReturn(optionalVehicle);
+		Mockito.when(this.mapper.map(foundVehicle, VehicleDTO.class)).thenReturn(vehicleDTO);
+		// THEN
+		assertThat(this.service.getVehicleById(1L)).isEqualTo(vehicleDTO);
+	}
+
+	@Test
 	void testUpdateVehicle() {
 		// GIVEN
 		Vehicle existingVehicle = new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
@@ -140,6 +154,20 @@ class VehicleServiceTest {
 
 		// THEN
 		assertThat(this.service.deleteVehicle(vehicleId)).isEqualTo(true);
+
+		Mockito.verify(this.repository, Mockito.times(1)).existsById(vehicleId);
+	}
+
+	@Test
+	void testDeleteVehicleNotFound() {
+		// GIVEN
+		Long vehicleId = 1L;
+
+		// WHEN
+		Mockito.when(this.repository.existsById(vehicleId)).thenReturn(true);
+
+		// THEN
+		assertThat(this.service.deleteVehicle(vehicleId)).isEqualTo(false);
 
 		Mockito.verify(this.repository, Mockito.times(1)).existsById(vehicleId);
 	}

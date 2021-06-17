@@ -41,8 +41,7 @@ public class VehicleController {
 
 	@GetMapping("/getById/{id}")
 	public VehicleDTO getVehicleById(@PathVariable Long id) {
-		VehicleDTO v = this.service.getVehicleById(id);
-		return v;
+		return this.service.getVehicleById(id);
 	}
 
 	// Update

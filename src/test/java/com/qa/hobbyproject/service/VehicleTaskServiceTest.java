@@ -144,5 +144,19 @@ class VehicleTaskServiceTest {
 
 		Mockito.verify(this.repository, Mockito.times(1)).existsById(taskId);
 	}
+	
+	@Test
+	void testDeleteVehicleTaskNotFound() {
+		// GIVEN
+		Long taskId = 99L;
+
+		// WHEN
+		Mockito.when(this.repository.existsById(taskId)).thenReturn(true);
+
+		// THEN
+		assertThat(this.service.deleteVehicleTask(taskId)).isEqualTo(false);
+
+		Mockito.verify(this.repository, Mockito.times(1)).existsById(taskId);
+	}
 
 }

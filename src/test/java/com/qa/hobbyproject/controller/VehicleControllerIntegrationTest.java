@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.hobbyproject.domain.Vehicle;
 
@@ -88,6 +89,20 @@ class VehicleControllerIntegrationTest {
 		ResultMatcher checkStatus = status().isOk();
 
 		ResultMatcher checkBody = content().json(vehiclesAsJSON);
+
+		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
+	}
+	
+	@Test
+	void testGetVehicleById() throws Exception {
+		Vehicle vehicle = new Vehicle(1L, "PB08 BSB", "Porsche", "Macan", "Blue", 258);
+		String vehicleAsJSON = this.mapper.writeValueAsString(vehicle);
+
+		RequestBuilder mockRequest = get("/vehicle/getById/1");
+
+		ResultMatcher checkStatus = status().isOk();
+
+		ResultMatcher checkBody = content().json(vehicleAsJSON);
 
 		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
