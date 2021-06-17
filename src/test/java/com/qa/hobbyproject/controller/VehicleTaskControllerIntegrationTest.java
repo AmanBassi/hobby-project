@@ -1,6 +1,7 @@
 package com.qa.hobbyproject.controller;
 
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -120,8 +121,14 @@ class VehicleTaskControllerIntegrationTest {
 	}
 
 	@Test
-	void testDeleteVehicleTask() {
-		fail("Not yet implemented");
+	void testDeleteVehicleTask() throws Exception {
+		RequestBuilder mockRequest = delete("/vehicletask/delete/1");
+
+		ResultMatcher checkStatus = status().isOk();
+
+		ResultMatcher checkBody = content().string("true");
+		
+		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 
 }
