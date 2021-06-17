@@ -36,6 +36,21 @@
                 Add Task
             </button>
 
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Task</th>
+                            <th scope="col">Due Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Get Request -->
+                    </tbody>
+                </table>
+            </div>
+
             <!-- Modal -->
             <div class="modal fade" id="createVehicleTaskModal" tabindex="-1"
                 aria-labelledby="createVehicleTaskModalLabel" aria-hidden="true">
@@ -51,10 +66,10 @@
                                     <div class="col-12">
                                         <label for="name" class="form-label">Task</label>
                                         <select class="form-select" aria-label="name" id="name" required="">
-                                            <option value="mot">MOT</option>
-                                            <option value="roadTax">Road Tax</option>
-                                            <option value="insurance">Insurance</option>
-                                            <option value="service">Service</option>
+                                            <option value="MOT">MOT</option>
+                                            <option value="Road Tax">Road Tax</option>
+                                            <option value="Insurance">Insurance</option>
+                                            <option value="Service">Service</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Valid vehicle task is required.
