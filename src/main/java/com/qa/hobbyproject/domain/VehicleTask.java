@@ -17,7 +17,7 @@ public class VehicleTask {
 	private String name;
 
 	private LocalDate dueDate;
-	
+
 	@ManyToOne
 	private Vehicle vehicle;
 
@@ -52,6 +52,14 @@ public class VehicleTask {
 
 	public void setDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	@Override
