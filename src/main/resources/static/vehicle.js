@@ -15,6 +15,7 @@
         const tableRow = document.createElement("tr");
 
         tableRow.appendChild(createOpenVehicleLink(vehicle.id));
+        tableRow.appendChild(createTableCell(vehicle.id));
         tableRow.appendChild(createTableCell(vehicle.registration));
         tableRow.appendChild(createTableCell(vehicle.make));
         tableRow.appendChild(createTableCell(vehicle.model));
