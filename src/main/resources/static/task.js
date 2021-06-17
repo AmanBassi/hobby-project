@@ -1,9 +1,13 @@
 (function () {
 
-    const getVehicle = async () => {
+    const getVehicleId = () => {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const id = urlParams.get('id');
+        return urlParams.get('id');
+    }
+
+    const getVehicle = async (id) => {
+
         const vehicle = await axios.get(`/vehicle/getById/${id}`);
 
         document.getElementById("vehicleId").innerText = vehicle.data.id;
@@ -14,7 +18,37 @@
         document.getElementById("vehicleHorsePower").innerText = vehicle.data.horsePower;
     }
 
-    getVehicle();
+    const getTasks = async (id) => {
+        const tableBody = document.querySelector("tbody");
+        tableBody.innerHTML = "";
+        const tasks = await axios.get(`/vehicletask/getAllByVehicle/${id}`);
+        tasks.data.forEach(task => {
+            renderTask(task);
+        });
+    }
+
+    const createTableCell = (data) => {
+        const cell = document.createElement("td");
+        cell.innerText = data;
+        cell.className = "align-middle";
+        return cell;
+    }
+
+    const renderTask = task => {
+        const tableBody = document.querySelector("tbody");
+
+        const tableRow = document.createElement("tr");
+
+        tableRow.appendChild(createTableCell(task.id));
+        tableRow.appendChild(createTableCell(task.name));
+        tableRow.appendChild(createTableCell(task.dueDate));
+
+        tableBody.appendChild(tableRow);
+    }
+
+    const vehicleId = getVehicleId();
+    getVehicle(vehicleId);
+    getTasks(vehicleId);
 
 
     document.getElementById("createVehicleTaskForm").addEventListener("submit", function (event) {
@@ -30,7 +64,7 @@
         const data = {
             name: this.name.value,
             dueDate: this.dueDate.value,
-            vehicle: { id: 1 }
+            vehicle: { id: vehicleId }
         }
 
         axios.post("/vehicletask/create", data)
@@ -42,6 +76,7 @@
 
                 document.getElementById("createVehicleTaskForm").classList.remove('was-validated');
                 document.getElementById("createVehicleTaskForm").reset();
+                getTasks(vehicleId);
             })
             .catch(function (error) {
                 console.log(error);

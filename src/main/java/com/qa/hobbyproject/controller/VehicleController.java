@@ -2,6 +2,7 @@ package com.qa.hobbyproject.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,8 @@ import com.qa.hobbyproject.service.VehicleService;
 @RestController
 @RequestMapping("/vehicle")
 public class VehicleController {
+	
+	@Autowired
 	private VehicleService service;
 
 	public VehicleController(VehicleService service) {
