@@ -1,9 +1,13 @@
 (function () {
 
-    const getVehicle = async () => {
+    const getVehicleId = () => {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
-        const id = urlParams.get('id');
+        return urlParams.get('id');
+    }
+
+    const getVehicle = async (id) => {
+
         const vehicle = await axios.get(`/vehicle/getById/${id}`);
 
         document.getElementById("vehicleId").innerText = vehicle.data.id;
@@ -14,7 +18,8 @@
         document.getElementById("vehicleHorsePower").innerText = vehicle.data.horsePower;
     }
 
-    getVehicle();
+    const vehicleId = getVehicleId();
+    getVehicle(vehicleId);
 
 
     document.getElementById("createVehicleTaskForm").addEventListener("submit", function (event) {
@@ -30,7 +35,7 @@
         const data = {
             name: this.name.value,
             dueDate: this.dueDate.value,
-            vehicle: { id: 1 }
+            vehicle: { id: vehicleId }
         }
 
         axios.post("/vehicletask/create", data)
