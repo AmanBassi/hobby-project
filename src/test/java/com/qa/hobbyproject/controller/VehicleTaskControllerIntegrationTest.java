@@ -3,6 +3,7 @@ package com.qa.hobbyproject.controller;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,6 +28,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.hobbyproject.domain.Vehicle;
 import com.qa.hobbyproject.domain.VehicleTask;
@@ -99,8 +101,22 @@ class VehicleTaskControllerIntegrationTest {
 	}
 
 	@Test
-	void testUpdateVehicleTask() {
-		fail("Not yet implemented");
+	void testUpdateVehicleTask() throws Exception {
+		Vehicle vehicle = new Vehicle(1L, null, null, null, null, 0);
+		VehicleTask task = new VehicleTask(1L, "Insurance", LocalDate.of(2021, 9, 3), vehicle);
+		VehicleTaskDTO taskDTO = new VehicleTaskDTO(1L, "Insurance", LocalDate.of(2021, 9, 3));
+		
+		String taskAsJSON = this.mapper.writeValueAsString(task);
+		String taskDTOAsJSON = this.mapper.writeValueAsString(taskDTO);
+
+		RequestBuilder mockRequest = put("/vehicletask/update/1").contentType(MediaType.APPLICATION_JSON)
+				.content(taskAsJSON);
+
+		ResultMatcher checkStatus = status().isOk();
+
+		ResultMatcher checkBody = content().json(taskDTOAsJSON);
+
+		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 
 	@Test
