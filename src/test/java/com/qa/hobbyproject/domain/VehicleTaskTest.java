@@ -119,6 +119,12 @@ class VehicleTaskTest {
 		task.setVehicle(v);
 		assertThat(task.getVehicle()).isEqualTo(v);
 	}
+	
+	@Test
+	void testToString() {
+		String output = "Task [id=1, name=MOT, dueDate=2021-07-01]";
+		assertThat(task.toString()).isEqualTo(output);
+	}
 
 	@Test
 	void testEqualsObject() {

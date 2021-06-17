@@ -156,6 +156,12 @@ class VehicleTest {
 		vehicle.setTasks(tasks);
 		assertThat(vehicle.getTasks()).isEqualTo(tasks);
 	}
+	
+	@Test
+	void testToString() {
+		String output = "Vehicle [id=1, registration=FE65 PKK, make=VW, model=Golf, colour=Black, horsePower=220, tasks=[Task [id=1, name=MOT, dueDate=2021-07-01]]]";
+		assertThat(vehicle.toString()).isEqualTo(output);
+	}
 
 	@Test
 	void testEqualsObject() {

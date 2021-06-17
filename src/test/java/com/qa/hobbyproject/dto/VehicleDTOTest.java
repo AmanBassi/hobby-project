@@ -2,15 +2,12 @@ package com.qa.hobbyproject.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.qa.hobbyproject.domain.Vehicle;
 
 class VehicleDTOTest {
 
@@ -128,6 +125,11 @@ class VehicleDTOTest {
 		assertThat(vehicle.getHorsePower()).isEqualTo(90);
 	}
 
+	@Test
+	void testToString() {
+		String output = "VehicleDTO [id=1, registration=FE65 PKK, make=VW, model=Golf, colour=Black, horsePower=220]";
+		assertThat(vehicle.toString()).isEqualTo(output);
+	}
 
 	@Test
 	void testEqualsObject() {
