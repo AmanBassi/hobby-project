@@ -1,6 +1,7 @@
 package com.qa.hobbyproject.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
@@ -32,6 +33,12 @@ public class VehicleService {
 				.collect(Collectors.toList());
 	}
 
+	public VehicleDTO getVehicleById(Long id) {
+		Optional<Vehicle> optionalVehicle = this.repository.findById(id);
+		Vehicle foundVehicle = optionalVehicle.orElseThrow(() -> new EntityNotFoundException());
+		return this.mapper.map(foundVehicle, VehicleDTO.class);
+	}
+
 	public VehicleDTO updateVehicle(Long id, Vehicle vehicle) {
 		Vehicle existingVehicle = this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException());
 
@@ -45,7 +52,7 @@ public class VehicleService {
 
 		return this.mapper.map(updatedVehicle, VehicleDTO.class);
 	}
-	
+
 	public boolean deleteVehicle(Long id) {
 		this.repository.deleteById(id);
 		return !this.repository.existsById(id);

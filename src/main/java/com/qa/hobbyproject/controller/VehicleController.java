@@ -35,13 +35,19 @@ public class VehicleController {
 	public List<VehicleDTO> getAll() {
 		return this.service.getVehicles();
 	}
-	
+
+	@GetMapping("/getById/{id}")
+	public VehicleDTO getVehicleById(@PathVariable Long id) {
+		VehicleDTO v = this.service.getVehicleById(id);
+		return v;
+	}
+
 	// Update
 	@PutMapping("/update/{id}")
 	public VehicleDTO updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
 		return this.service.updateVehicle(id, vehicle);
 	}
-	
+
 	// Delete
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteVehicle(@PathVariable Long id) {
