@@ -1,9 +1,14 @@
 package com.qa.hobbyproject.domain;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Vehicle {
@@ -20,6 +25,10 @@ public class Vehicle {
 	private String colour;
 
 	private int horsePower;
+
+	@OneToMany(mappedBy = "vehicle")
+	@JsonIgnore
+	private List<VehicleTask> tasks;
 
 	public Vehicle() {
 	}
@@ -39,6 +48,17 @@ public class Vehicle {
 		this.model = model;
 		this.colour = colour;
 		this.horsePower = horsePower;
+	}
+
+	public Vehicle(Long id, String registration, String make, String model, String colour, int horsePower,
+			List<VehicleTask> tasks) {
+		this.id = id;
+		this.registration = registration;
+		this.make = make;
+		this.model = model;
+		this.colour = colour;
+		this.horsePower = horsePower;
+		this.tasks = tasks;
 	}
 
 	public Long getId() {
@@ -65,6 +85,10 @@ public class Vehicle {
 		return horsePower;
 	}
 
+	public List<VehicleTask> getTasks() {
+		return tasks;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -89,10 +113,14 @@ public class Vehicle {
 		this.horsePower = horsePower;
 	}
 
+	public void setTasks(List<VehicleTask> tasks) {
+		this.tasks = tasks;
+	}
+
 	@Override
 	public String toString() {
 		return "Vehicle [id=" + id + ", registration=" + registration + ", make=" + make + ", model=" + model
-				+ ", colour=" + colour + ", horsePower=" + horsePower + "]";
+				+ ", colour=" + colour + ", horsePower=" + horsePower + ", tasks=" + tasks + "]";
 	}
 
 	@Override
@@ -105,6 +133,7 @@ public class Vehicle {
 		result = prime * result + ((make == null) ? 0 : make.hashCode());
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		result = prime * result + ((registration == null) ? 0 : registration.hashCode());
+		result = prime * result + ((tasks == null) ? 0 : tasks.hashCode());
 		return result;
 	}
 
@@ -143,6 +172,11 @@ public class Vehicle {
 			if (other.registration != null)
 				return false;
 		} else if (!registration.equals(other.registration))
+			return false;
+		if (tasks == null) {
+			if (other.tasks != null)
+				return false;
+		} else if (!tasks.equals(other.tasks))
 			return false;
 		return true;
 	}
