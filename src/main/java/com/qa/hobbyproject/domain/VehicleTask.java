@@ -23,11 +23,29 @@ public class VehicleTask {
 
 	public VehicleTask() {
 	}
+	
+	public VehicleTask(String name, LocalDate dueDate) {
+		this.name = name;
+		this.dueDate = dueDate;
+	}
 
 	public VehicleTask(Long id, String name, LocalDate dueDate) {
 		this.id = id;
 		this.name = name;
 		this.dueDate = dueDate;
+	}
+
+	public VehicleTask(String name, LocalDate dueDate, Vehicle vehicle) {
+		this.name = name;
+		this.dueDate = dueDate;
+		this.vehicle = vehicle;
+	}
+	
+	public VehicleTask(Long id, String name, LocalDate dueDate, Vehicle vehicle) {
+		this.id = id;
+		this.name = name;
+		this.dueDate = dueDate;
+		this.vehicle = vehicle;
 	}
 
 	public Long getId() {

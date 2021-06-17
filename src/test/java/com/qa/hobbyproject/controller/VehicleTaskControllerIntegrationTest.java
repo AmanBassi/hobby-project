@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +30,15 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.hobbyproject.domain.Vehicle;
+import com.qa.hobbyproject.domain.VehicleTask;
+import com.qa.hobbyproject.dto.VehicleTaskDTO;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@Sql(scripts = { "classpath:sql-schema.sql",
-		"classpath:sql-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = { "classpath:task-schema.sql",
+		"classpath:task-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("test")
-class VehicleControllerTest {
+class VehicleTaskControllerIntegrationTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -60,55 +63,64 @@ class VehicleControllerTest {
 	}
 
 	@Test
-	void testAddVehicle() throws Exception {
-		Vehicle vehicle = new Vehicle("FE65 PKK", "VW", "Golf", "Black", 220);
-		Vehicle createdVehicle = new Vehicle(2L, "FE65 PKK", "VW", "Golf", "Black", 220);
+	void testAddVehicleTask() throws Exception {
+		Vehicle vehicle = new Vehicle(1L, null, null, null, null, 0);
+		VehicleTask task = new VehicleTask("MOT", LocalDate.of(2021, 7, 1), vehicle);
+		VehicleTaskDTO createdTask = new VehicleTaskDTO(3L, "MOT", LocalDate.of(2021, 7, 1));
 
-		String vehicleAsJSON = this.mapper.writeValueAsString(vehicle);
-		String createdVehicleAsJSON = this.mapper.writeValueAsString(createdVehicle);
+		String taskAsJSON = this.mapper.writeValueAsString(task);
+		String createdtaskAsJSON = this.mapper.writeValueAsString(createdTask);
 
-		RequestBuilder mockRequest = post("/vehicle/create").content(vehicleAsJSON).contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder mockRequest = post("/vehicletask/create").content(taskAsJSON)
+				.contentType(MediaType.APPLICATION_JSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
-		ResultMatcher checkBody = content().json(createdVehicleAsJSON);
+		ResultMatcher checkBody = content().json(createdtaskAsJSON);
 
 		mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 
 	@Test
 	void testGetAll() throws Exception {
-		Vehicle vehicle = new Vehicle(1L, "PB08 BSB", "Porsche", "Macan", "Blue", 258);
-		List<Vehicle> vehicles = new ArrayList<>();
-		vehicles.add(vehicle);
-		String vehiclesAsJSON = this.mapper.writeValueAsString(vehicles);
+		VehicleTaskDTO task1 = new VehicleTaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		VehicleTaskDTO task2 = new VehicleTaskDTO(2L, "Service", LocalDate.of(2021, 8, 2));
+		List<VehicleTaskDTO> tasks = new ArrayList<>();
+		tasks.add(task1);
+		tasks.add(task2);
+		String tasksAsJSON = this.mapper.writeValueAsString(tasks);
 
-		RequestBuilder mockRequest = get("/vehicle/getAll");
+		RequestBuilder mockRequest = get("/vehicletask/getAllByVehicle/1");
 
 		ResultMatcher checkStatus = status().isOk();
 
-		ResultMatcher checkBody = content().json(vehiclesAsJSON);
+		ResultMatcher checkBody = content().json(tasksAsJSON);
 
 		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 
 	@Test
-	void testUpdateVehicle() throws Exception {
-		Vehicle vehicle = new Vehicle(1L, "BP14 NRE", "Suzuki", "Swift", "Grey", 90);
-		String vehicleAsJSON = this.mapper.writeValueAsString(vehicle);
+	void testUpdateVehicleTask() throws Exception {
+		Vehicle vehicle = new Vehicle(1L, null, null, null, null, 0);
+		VehicleTask task = new VehicleTask(1L, "Insurance", LocalDate.of(2021, 9, 3), vehicle);
+		VehicleTaskDTO taskDTO = new VehicleTaskDTO(1L, "Insurance", LocalDate.of(2021, 9, 3));
+		
+		String taskAsJSON = this.mapper.writeValueAsString(task);
+		String taskDTOAsJSON = this.mapper.writeValueAsString(taskDTO);
 
-		RequestBuilder mockRequest = put("/vehicle/update/1").contentType(MediaType.APPLICATION_JSON).content(vehicleAsJSON);
+		RequestBuilder mockRequest = put("/vehicletask/update/1").contentType(MediaType.APPLICATION_JSON)
+				.content(taskAsJSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
-		ResultMatcher checkBody = content().json(vehicleAsJSON);
+		ResultMatcher checkBody = content().json(taskDTOAsJSON);
 
 		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
-	
+
 	@Test
-	void testDeleteVehicle() throws Exception {
-		RequestBuilder mockRequest = delete("/vehicle/delete/1");
+	void testDeleteVehicleTask() throws Exception {
+		RequestBuilder mockRequest = delete("/vehicletask/delete/1");
 
 		ResultMatcher checkStatus = status().isOk();
 
