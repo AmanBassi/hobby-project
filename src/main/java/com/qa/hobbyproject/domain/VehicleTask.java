@@ -23,6 +23,11 @@ public class VehicleTask {
 
 	public VehicleTask() {
 	}
+	
+	public VehicleTask(String name, LocalDate dueDate) {
+		this.name = name;
+		this.dueDate = dueDate;
+	}
 
 	public VehicleTask(Long id, String name, LocalDate dueDate) {
 		this.id = id;
