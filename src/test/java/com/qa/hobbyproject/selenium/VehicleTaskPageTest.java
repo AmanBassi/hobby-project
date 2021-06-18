@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -33,7 +34,8 @@ public class VehicleTaskPageTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-		driver = new ChromeDriver();
+		ChromeOptions config = new ChromeOptions().setHeadless(true);
+		driver = new ChromeDriver(config);
 	}
 
 	@AfterAll
@@ -99,6 +101,18 @@ public class VehicleTaskPageTest {
 		assertEquals("1", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[1]")).getText());
 		assertEquals("Road Tax", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[2]")).getText());
 		assertEquals("2021-09-03", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[3]")).getText());
+	}
+	
+	@Test
+	void testDelete() {
+		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]")));
+		String originalRow = driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]")).getText();
+		assertEquals(2, driver.findElements(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")).size());
+		
+		driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[5]/button")).click();
+		
+		new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("/html/body/div/main/div[1]/table/tbody/tr"), originalRow));
+		assertEquals(1, driver.findElements(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")).size());
 	}
 
 }
