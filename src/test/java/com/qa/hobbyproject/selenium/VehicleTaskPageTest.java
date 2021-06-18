@@ -96,7 +96,7 @@ public class VehicleTaskPageTest {
 		dropdown.selectByValue("Road Tax");
 		driver.findElement(By.xpath("//*[@id=\"updateDueDate\"]")).sendKeys("03092021");
 		driver.findElement(By.xpath("//*[@id=\"updateVehicleTaskButton\"]")).click();
-		new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("/html/body/div/main/div[1]/table/tbody/tr"), originalRow));
+		new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]"), originalRow));
 		
 		assertEquals("1", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[1]")).getText());
 		assertEquals("Road Tax", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[2]")).getText());
