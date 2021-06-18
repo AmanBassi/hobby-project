@@ -21,14 +21,14 @@
     const getTasks = async (id) => {
         const tableBody = document.querySelector("tbody");
         tableBody.innerHTML = "";
-        const tasks = await axios.get(`/vehicletask/getAllByVehicle/${id}`);
+        const tasks = await axios.get(`/task/getAllByVehicle/${id}`);
         tasks.data.forEach(task => {
             renderTask(task);
         });
     }
 
     const deleteTask = async (id) => {
-        const result = await axios.delete(`/vehicletask/delete/${id}`);
+        const result = await axios.delete(`/task/delete/${id}`);
         getTasks(vehicleId);
     }
 
@@ -46,11 +46,11 @@
         updateButton.className = "btn btn-primary";
         updateButton.setAttribute("type", "button");
         updateButton.setAttribute("data-bs-toggle", "modal");
-        updateButton.setAttribute("data-bs-target", "#updateVehicleTaskModal");
+        updateButton.setAttribute("data-bs-target", "#updateTaskModal");
         updateButton.addEventListener("click", function (event) {
             document.getElementById("updateName").value = task.name;
             document.getElementById("updateDueDate").value = task.dueDate;
-            document.getElementById("updateVehicleTaskButton").setAttribute("taskId", task.id);
+            document.getElementById("updateTaskButton").setAttribute("taskId", task.id);
         });
 
         cell.appendChild(updateButton)
@@ -89,7 +89,7 @@
     getVehicle(vehicleId);
     getTasks(vehicleId);
 
-    document.getElementById("createVehicleTaskForm").addEventListener("submit", function (event) {
+    document.getElementById("createTaskForm").addEventListener("submit", function (event) {
         event.preventDefault();
         if (!this.checkValidity()) {
             event.stopPropagation();
@@ -105,15 +105,15 @@
             vehicle: { id: vehicleId }
         }
 
-        axios.post("/vehicletask/create", data)
+        axios.post("/task/create", data)
             .then(function (response) {
                 console.log(response);
-                var myModalElement = document.getElementById('createVehicleTaskModal');
+                var myModalElement = document.getElementById('createTaskModal');
                 var modal = bootstrap.Modal.getInstance(myModalElement);
                 modal.hide();
 
-                document.getElementById("createVehicleTaskForm").classList.remove('was-validated');
-                document.getElementById("createVehicleTaskForm").reset();
+                document.getElementById("createTaskForm").classList.remove('was-validated');
+                document.getElementById("createTaskForm").reset();
                 getTasks(vehicleId);
             })
             .catch(function (error) {
@@ -122,7 +122,7 @@
         console.log(this);
     });
 
-    document.getElementById("updateVehicleTaskForm").addEventListener("submit", function (event) {
+    document.getElementById("updateTaskForm").addEventListener("submit", function (event) {
         event.preventDefault();
         if (!this.checkValidity()) {
             event.stopPropagation();
@@ -132,21 +132,21 @@
         this.classList.add('was-validated')
         console.log("form was valid");
 
-        const taskId = document.getElementById("updateVehicleTaskButton").getAttribute("taskId");
+        const taskId = document.getElementById("updateTaskButton").getAttribute("taskId");
         const data = {
             name: this.updateName.value,
             dueDate: this.updateDueDate.value
         }
 
-        axios.put(`/vehicletask/update/${taskId}`, data)
+        axios.put(`/task/update/${taskId}`, data)
             .then(function (response) {
                 console.log(response);
-                var myModalElement = document.getElementById('updateVehicleTaskModal');
+                var myModalElement = document.getElementById('updateTaskModal');
                 var modal = bootstrap.Modal.getInstance(myModalElement);
                 modal.hide();
 
-                document.getElementById("updateVehicleTaskForm").classList.remove('was-validated');
-                document.getElementById("updateVehicleTaskForm").reset();
+                document.getElementById("updateTaskForm").classList.remove('was-validated');
+                document.getElementById("updateTaskForm").reset();
                 getTasks(vehicleId);
             })
             .catch(function (error) {

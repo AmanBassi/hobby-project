@@ -83,8 +83,7 @@ public class VehicleDTO {
 
 	@Override
 	public String toString() {
-		return "VehicleDTO [id=" + id + ", registration=" + registration + ", make=" + make + ", model=" + model
-				+ ", colour=" + colour + ", horsePower=" + horsePower + "]";
+		return "VehicleDTO [id=" + id + ", registration=" + registration + ", make=" + make + ", model=" + model + ", colour=" + colour + ", horsePower=" + horsePower + "]";
 	}
 
 	@Override

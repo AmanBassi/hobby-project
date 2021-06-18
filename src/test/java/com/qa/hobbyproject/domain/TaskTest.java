@@ -11,9 +11,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class VehicleTaskTest {
+class TaskTest {
 
-	static VehicleTask task;
+	static Task task;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -25,7 +25,7 @@ class VehicleTaskTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		task = new VehicleTask(1L, "MOT", LocalDate.of(2021, 7, 1), new Vehicle());
+		task = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), new Vehicle());
 	}
 
 	@AfterEach
@@ -34,45 +34,45 @@ class VehicleTaskTest {
 
 	@Test
 	void testHashCode() {
-		VehicleTask task1 = new VehicleTask(1L, "MOT", LocalDate.of(2021, 7, 1));
-		VehicleTask task2 = new VehicleTask(1L, "MOT", LocalDate.of(2021, 7, 1));
+		Task task1 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
+		Task task2 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
 
 		assertTrue(task1.hashCode() == task2.hashCode());
 	}
 
 	@Test
 	void testVehicleTask() {
-		VehicleTask vt = new VehicleTask();
+		Task vt = new Task();
 
-		assertThat(vt).isInstanceOf(VehicleTask.class);
+		assertThat(vt).isInstanceOf(Task.class);
 	}
 
 	@Test
 	void testVehicleTaskStringLocalDate() {
-		VehicleTask vt = new VehicleTask("MOT", LocalDate.of(2021, 7, 1));
+		Task vt = new Task("MOT", LocalDate.of(2021, 7, 1));
 
-		assertThat(vt).isInstanceOf(VehicleTask.class);
+		assertThat(vt).isInstanceOf(Task.class);
 	}
 
 	@Test
 	void testVehicleTaskLongStringLocalDate() {
-		VehicleTask vt = new VehicleTask(1L, "MOT", LocalDate.of(2021, 7, 1));
+		Task vt = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
 
-		assertThat(vt).isInstanceOf(VehicleTask.class);
+		assertThat(vt).isInstanceOf(Task.class);
 	}
 
 	@Test
 	void testVehicleTaskStringLocalDateVehicle() {
-		VehicleTask vt = new VehicleTask("MOT", LocalDate.of(2021, 7, 1), new Vehicle());
+		Task vt = new Task("MOT", LocalDate.of(2021, 7, 1), new Vehicle());
 
-		assertThat(vt).isInstanceOf(VehicleTask.class);
+		assertThat(vt).isInstanceOf(Task.class);
 	}
 
 	@Test
 	void testVehicleTaskLongStringLocalDateVehicle() {
-		VehicleTask vt = new VehicleTask(1L, "MOT", LocalDate.of(2021, 7, 1), new Vehicle());
+		Task vt = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), new Vehicle());
 
-		assertThat(vt).isInstanceOf(VehicleTask.class);
+		assertThat(vt).isInstanceOf(Task.class);
 	}
 
 	@Test
@@ -119,7 +119,7 @@ class VehicleTaskTest {
 		task.setVehicle(v);
 		assertThat(task.getVehicle()).isEqualTo(v);
 	}
-	
+
 	@Test
 	void testToString() {
 		String output = "Task [id=1, name=MOT, dueDate=2021-07-01]";
@@ -128,9 +128,9 @@ class VehicleTaskTest {
 
 	@Test
 	void testEqualsObject() {
-		VehicleTask task1 = new VehicleTask(1L, "MOT", LocalDate.of(2021, 7, 1));
-		VehicleTask task2 = new VehicleTask(1L, "MOT", LocalDate.of(2021, 7, 1));
-		
+		Task task1 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
+		Task task2 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
+
 		assertTrue(task1.equals(task2) && task2.equals(task1));
 	}
 

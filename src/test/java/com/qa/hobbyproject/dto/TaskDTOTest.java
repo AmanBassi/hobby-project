@@ -11,9 +11,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class VehicleTaskDTOTest {
+class TaskDTOTest {
 
-	static VehicleTaskDTO task;
+	static TaskDTO task;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -25,7 +25,7 @@ class VehicleTaskDTOTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		task = new VehicleTaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		task = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
 	}
 
 	@AfterEach
@@ -34,24 +34,24 @@ class VehicleTaskDTOTest {
 
 	@Test
 	void testHashCode() {
-		VehicleTaskDTO task1 = new VehicleTaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
-		VehicleTaskDTO task2 = new VehicleTaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO task2 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
 
 		assertTrue(task1.hashCode() == task2.hashCode());
 	}
 
 	@Test
 	void testVehicleTaskDTO() {
-		VehicleTaskDTO task = new VehicleTaskDTO();
+		TaskDTO task = new TaskDTO();
 
-		assertThat(task).isInstanceOf(VehicleTaskDTO.class);
+		assertThat(task).isInstanceOf(TaskDTO.class);
 	}
 
 	@Test
 	void testVehicleTaskDTOLongStringLocalDate() {
-		VehicleTaskDTO task = new VehicleTaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO task = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
 
-		assertThat(task).isInstanceOf(VehicleTaskDTO.class);
+		assertThat(task).isInstanceOf(TaskDTO.class);
 	}
 
 	@Test
@@ -95,8 +95,8 @@ class VehicleTaskDTOTest {
 
 	@Test
 	void testEqualsObject() {
-		VehicleTaskDTO task1 = new VehicleTaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
-		VehicleTaskDTO task2 = new VehicleTaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO task2 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
 
 		assertTrue(task1.equals(task2) && task2.equals(task1));
 	}

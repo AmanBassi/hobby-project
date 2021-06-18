@@ -2,17 +2,17 @@ package com.qa.hobbyproject.dto;
 
 import java.time.LocalDate;
 
-public class VehicleTaskDTO {
+public class TaskDTO {
 	private Long id;
 
 	private String name;
 
 	private LocalDate dueDate;
 
-	public VehicleTaskDTO() {
+	public TaskDTO() {
 	}
 
-	public VehicleTaskDTO(Long id, String name, LocalDate dueDate) {
+	public TaskDTO(Long id, String name, LocalDate dueDate) {
 		this.id = id;
 		this.name = name;
 		this.dueDate = dueDate;
@@ -65,7 +65,7 @@ public class VehicleTaskDTO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		VehicleTaskDTO other = (VehicleTaskDTO) obj;
+		TaskDTO other = (TaskDTO) obj;
 		if (dueDate == null) {
 			if (other.dueDate != null)
 				return false;

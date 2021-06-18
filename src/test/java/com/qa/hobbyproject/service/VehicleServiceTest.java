@@ -126,8 +126,7 @@ class VehicleServiceTest {
 	void testUpdateVehicle() {
 		// GIVEN
 		Vehicle existingVehicle = new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
-		Optional<Vehicle> optionalExistingVehicle = Optional
-				.ofNullable(new Vehicle(1L, "AB15 JAT", "Volkswagen", "GTI", "White", 240));
+		Optional<Vehicle> optionalExistingVehicle = Optional.ofNullable(new Vehicle(1L, "AB15 JAT", "Volkswagen", "GTI", "White", 240));
 		Vehicle updatedVehicle = new Vehicle(1L, "AB15 JAT", "Volkswagen", "GTI", "White", 240);
 		VehicleDTO updatedVehicleDTO = new VehicleDTO(1L, "AB15 JAT", "Volkswagen", "GTI", "White", 240);
 

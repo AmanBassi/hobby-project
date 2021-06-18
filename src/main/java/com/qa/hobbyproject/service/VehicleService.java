@@ -29,8 +29,7 @@ public class VehicleService {
 	}
 
 	public List<VehicleDTO> getVehicles() {
-		return this.repository.findAll().stream().map(vehicle -> this.mapper.map(vehicle, VehicleDTO.class))
-				.collect(Collectors.toList());
+		return this.repository.findAll().stream().map(vehicle -> this.mapper.map(vehicle, VehicleDTO.class)).collect(Collectors.toList());
 	}
 
 	public VehicleDTO getVehicleById(Long id) {

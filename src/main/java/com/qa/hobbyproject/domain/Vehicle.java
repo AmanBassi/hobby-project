@@ -28,7 +28,7 @@ public class Vehicle {
 
 	@OneToMany(mappedBy = "vehicle")
 	@JsonIgnore
-	private List<VehicleTask> tasks;
+	private List<Task> tasks;
 
 	public Vehicle() {
 	}
@@ -50,8 +50,7 @@ public class Vehicle {
 		this.horsePower = horsePower;
 	}
 
-	public Vehicle(Long id, String registration, String make, String model, String colour, int horsePower,
-			List<VehicleTask> tasks) {
+	public Vehicle(Long id, String registration, String make, String model, String colour, int horsePower, List<Task> tasks) {
 		this.id = id;
 		this.registration = registration;
 		this.make = make;
@@ -85,7 +84,7 @@ public class Vehicle {
 		return horsePower;
 	}
 
-	public List<VehicleTask> getTasks() {
+	public List<Task> getTasks() {
 		return tasks;
 	}
 
@@ -113,14 +112,13 @@ public class Vehicle {
 		this.horsePower = horsePower;
 	}
 
-	public void setTasks(List<VehicleTask> tasks) {
+	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
 	}
 
 	@Override
 	public String toString() {
-		return "Vehicle [id=" + id + ", registration=" + registration + ", make=" + make + ", model=" + model
-				+ ", colour=" + colour + ", horsePower=" + horsePower + ", tasks=" + tasks + "]";
+		return "Vehicle [id=" + id + ", registration=" + registration + ", make=" + make + ", model=" + model + ", colour=" + colour + ", horsePower=" + horsePower + ", tasks=" + tasks + "]";
 	}
 
 	@Override

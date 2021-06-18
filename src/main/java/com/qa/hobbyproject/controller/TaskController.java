@@ -12,42 +12,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.hobbyproject.domain.VehicleTask;
-import com.qa.hobbyproject.dto.VehicleTaskDTO;
-import com.qa.hobbyproject.service.VehicleTaskService;
+import com.qa.hobbyproject.domain.Task;
+import com.qa.hobbyproject.dto.TaskDTO;
+import com.qa.hobbyproject.service.TaskService;
 
 @RestController
-@RequestMapping("/vehicletask")
-public class VehicleTaskController {
+@RequestMapping("/task")
+public class TaskController {
 
 	@Autowired
-	private VehicleTaskService service;
+	private TaskService service;
 
-	public VehicleTaskController(VehicleTaskService service) {
+	public TaskController(TaskService service) {
 		this.service = service;
 	}
 
 	// Create
 	@PostMapping("/create")
-	public VehicleTaskDTO addVehicleTask(@RequestBody VehicleTask task) {
-		return this.service.addVehicleTask(task);
+	public TaskDTO addTask(@RequestBody Task task) {
+		return this.service.addTask(task);
 	}
 
 	// Read
 	@GetMapping("/getAllByVehicle/{id}")
-	public List<VehicleTaskDTO> getAll(@PathVariable Long id) {
-		return this.service.getVehicleTasksByVehicleId(id);
+	public List<TaskDTO> getAll(@PathVariable Long id) {
+		return this.service.getTasksByVehicleId(id);
 	}
 
 	// Update
 	@PutMapping("/update/{id}")
-	public VehicleTaskDTO updateVehicleTask(@PathVariable Long id, @RequestBody VehicleTask task) {
-		return this.service.updateVehicleTask(id, task);
+	public TaskDTO updateTask(@PathVariable Long id, @RequestBody Task task) {
+		return this.service.updateTask(id, task);
 	}
 
 	// Delete
 	@DeleteMapping("/delete/{id}")
-	public boolean deleteVehicleTask(@PathVariable Long id) {
-		return this.service.deleteVehicleTask(id);
+	public boolean deleteTask(@PathVariable Long id) {
+		return this.service.deleteTask(id);
 	}
 }
