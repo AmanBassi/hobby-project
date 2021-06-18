@@ -94,6 +94,7 @@ public class VehiclePageTest {
 	@Test
 	void testUpdate() {
 		driver.findElement(By.linkText("Enter system")).click();
+		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")));
 		driver.findElement(By.cssSelector(".btn-primary:nth-child(1)")).click();
 		String originalRow = driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")).getText();
 

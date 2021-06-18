@@ -23,10 +23,10 @@ public class TaskService {
 		this.mapper = mapper;
 	}
 
-	public TaskDTO addTask(Long id, TaskDTO task) {
-		Task t = this.mapper.map(task, Task.class);
-		t.setVehicle(new Vehicle(id, "", "", "", "", 0));
-		Task saved = this.repository.save(t);
+	public TaskDTO addTask(Long id, TaskDTO taskDTO) {
+		Task task = this.mapper.map(taskDTO, Task.class);
+		task.setVehicle(new Vehicle(id, "", "", "", "", 0));
+		Task saved = this.repository.save(task);
 		return this.mapper.map(saved, TaskDTO.class);
 	}
 

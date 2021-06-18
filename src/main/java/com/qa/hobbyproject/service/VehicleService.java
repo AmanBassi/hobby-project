@@ -23,7 +23,8 @@ public class VehicleService {
 		this.mapper = mapper;
 	}
 
-	public VehicleDTO addVehicle(Vehicle vehicle) {
+	public VehicleDTO addVehicle(VehicleDTO vehicleDTO) {
+		Vehicle vehicle = this.mapper.map(vehicleDTO, Vehicle.class);
 		Vehicle saved = this.repository.save(vehicle);
 		return this.mapper.map(saved, VehicleDTO.class);
 	}

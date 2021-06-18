@@ -63,14 +63,16 @@ class VehicleServiceTest {
 		VehicleDTO savedVehicle = new VehicleDTO(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
 
 		// GIVEN
+		VehicleDTO vehicleDTO = new VehicleDTO("FE65 PKK", "VW", "Golf", "Black", 220);
 		Vehicle vehicle = new Vehicle("FE65 PKK", "VW", "Golf", "Black", 220);
 
 		// WHEN
+		Mockito.when(this.mapper.map(vehicleDTO, Vehicle.class)).thenReturn(vehicle);
 		Mockito.when(this.repository.save(vehicle)).thenReturn(createdVehicle);
 		Mockito.when(this.mapper.map(createdVehicle, VehicleDTO.class)).thenReturn(savedVehicle);
 
 		// THEN
-		assertThat(this.service.addVehicle(vehicle)).isEqualTo(savedVehicle);
+		assertThat(this.service.addVehicle(vehicleDTO)).isEqualTo(savedVehicle);
 
 		Mockito.verify(this.repository, Mockito.times(1)).save(vehicle);
 		Mockito.verify(this.mapper, Mockito.times(1)).map(createdVehicle, VehicleDTO.class);
