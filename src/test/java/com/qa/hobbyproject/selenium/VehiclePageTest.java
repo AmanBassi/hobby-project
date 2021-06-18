@@ -70,6 +70,10 @@ public class VehiclePageTest {
 
 		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[2]")).getText(), "2");
 		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[3]")).getText(), "FE65 PKK");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[4]")).getText(), "VW");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[5]")).getText(), "Golf");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[6]")).getText(), "Black");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[7]")).getText(), "220");
 	}
 
 	@Test
