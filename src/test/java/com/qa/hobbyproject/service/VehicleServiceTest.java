@@ -155,7 +155,7 @@ class VehicleServiceTest {
 		Mockito.when(this.repository.existsById(vehicleId)).thenReturn(false);
 
 		// THEN
-		assertThat(this.service.deleteVehicle(vehicleId)).isEqualTo(true);
+		assertThat(this.service.deleteVehicle(vehicleId)).isTrue();
 
 		Mockito.verify(this.repository, Mockito.times(1)).existsById(vehicleId);
 	}
@@ -169,7 +169,7 @@ class VehicleServiceTest {
 		Mockito.when(this.repository.existsById(vehicleId)).thenReturn(true);
 
 		// THEN
-		assertThat(this.service.deleteVehicle(vehicleId)).isEqualTo(false);
+		assertThat(this.service.deleteVehicle(vehicleId)).isFalse();
 
 		Mockito.verify(this.repository, Mockito.times(1)).existsById(vehicleId);
 	}

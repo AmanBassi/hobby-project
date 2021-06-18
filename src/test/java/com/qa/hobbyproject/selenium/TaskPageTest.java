@@ -24,7 +24,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Sql(scripts = { "classpath:task-schema.sql", "classpath:task-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("test")
-public class TaskPageTest {
+class TaskPageTest {
 
 	private static WebDriver driver;
 

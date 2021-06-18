@@ -24,7 +24,7 @@ public class VehicleService {
 	}
 
 	public VehicleDTO addVehicle(VehicleDTO vehicleDTO) {
-		Vehicle vehicle = this.mapper.map(vehicleDTO, Vehicle.class);
+		var vehicle = this.mapper.map(vehicleDTO, Vehicle.class);
 		Vehicle saved = this.repository.save(vehicle);
 		return this.mapper.map(saved, VehicleDTO.class);
 	}
@@ -35,12 +35,12 @@ public class VehicleService {
 
 	public VehicleDTO getVehicleById(Long id) {
 		Optional<Vehicle> optionalVehicle = this.repository.findById(id);
-		Vehicle foundVehicle = optionalVehicle.orElseThrow(() -> new EntityNotFoundException());
+		var foundVehicle = optionalVehicle.orElseThrow(EntityNotFoundException::new);
 		return this.mapper.map(foundVehicle, VehicleDTO.class);
 	}
 
 	public VehicleDTO updateVehicle(Long id, VehicleDTO vehicle) {
-		Vehicle existingVehicle = this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+		var existingVehicle = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
 
 		existingVehicle.setRegistration(vehicle.getRegistration());
 		existingVehicle.setMake(vehicle.getMake());
@@ -48,7 +48,7 @@ public class VehicleService {
 		existingVehicle.setColour(vehicle.getColour());
 		existingVehicle.setHorsePower(vehicle.getHorsePower());
 
-		Vehicle updatedVehicle = this.repository.save(existingVehicle);
+		var updatedVehicle = this.repository.save(existingVehicle);
 
 		return this.mapper.map(updatedVehicle, VehicleDTO.class);
 	}

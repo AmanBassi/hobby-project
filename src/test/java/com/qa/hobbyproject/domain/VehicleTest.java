@@ -1,6 +1,7 @@
 package com.qa.hobbyproject.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
@@ -43,7 +44,7 @@ class VehicleTest {
 		Vehicle vechicle1 = new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
 		Vehicle vechicle2 = new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
 
-		assertTrue(vechicle1.hashCode() == vechicle2.hashCode());
+		assertEquals(vechicle1.hashCode(), vechicle2.hashCode());
 	}
 
 	@Test
@@ -159,8 +160,8 @@ class VehicleTest {
 
 	@Test
 	void testToString() {
-		String output = "Vehicle [id=1, registration=FE65 PKK, make=VW, model=Golf, colour=Black, horsePower=220, tasks=[Task [id=1, name=MOT, dueDate=2021-07-01]]]";
-		assertThat(vehicle.toString()).isEqualTo(output);
+		String output = "Vehicle [id=1, registration=FE65 PKK, make=VW, model=Golf, colour=Black, horsePower=220, tasks=[Task [id=1, name=MOT, dueDate=2021-07-01, vehicle=null]]]";
+		assertThat(vehicle.toString()).hasToString(output);
 	}
 
 	@Test

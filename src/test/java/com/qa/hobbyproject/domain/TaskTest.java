@@ -37,7 +37,7 @@ class TaskTest {
 		Task task1 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
 		Task task2 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
 
-		assertTrue(task1.hashCode() == task2.hashCode());
+		assertEquals(task1.hashCode(), task2.hashCode());
 	}
 
 	@Test
@@ -122,8 +122,8 @@ class TaskTest {
 
 	@Test
 	void testToString() {
-		String output = "Task [id=1, name=MOT, dueDate=2021-07-01]";
-		assertThat(task.toString()).isEqualTo(output);
+		String output = "Task [id=1, name=MOT, dueDate=2021-07-01, vehicle=Vehicle [id=null, registration=null, make=null, model=null, colour=null, horsePower=0, tasks=null]]";
+		assertThat(task.toString()).hasToString(output);
 	}
 
 	@Test

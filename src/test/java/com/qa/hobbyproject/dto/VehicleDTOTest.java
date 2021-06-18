@@ -1,6 +1,7 @@
 package com.qa.hobbyproject.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
@@ -35,7 +36,7 @@ class VehicleDTOTest {
 		VehicleDTO vechicle1 = new VehicleDTO(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
 		VehicleDTO vechicle2 = new VehicleDTO(1L, "FE65 PKK", "VW", "Golf", "Black", 220);
 
-		assertTrue(vechicle1.hashCode() == vechicle2.hashCode());
+		assertEquals(vechicle1.hashCode(), vechicle2.hashCode());
 	}
 
 	@Test
@@ -128,7 +129,7 @@ class VehicleDTOTest {
 	@Test
 	void testToString() {
 		String output = "VehicleDTO [id=1, registration=FE65 PKK, make=VW, model=Golf, colour=Black, horsePower=220]";
-		assertThat(vehicle.toString()).isEqualTo(output);
+		assertThat(vehicle.toString()).hasToString(output);
 	}
 
 	@Test

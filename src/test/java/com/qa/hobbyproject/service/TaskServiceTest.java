@@ -142,7 +142,7 @@ class TaskServiceTest {
 		Mockito.when(this.repository.existsById(taskId)).thenReturn(false);
 
 		// THEN
-		assertThat(this.service.deleteTask(taskId)).isEqualTo(true);
+		assertThat(this.service.deleteTask(taskId)).isTrue();
 
 		Mockito.verify(this.repository, Mockito.times(1)).existsById(taskId);
 	}
@@ -156,7 +156,7 @@ class TaskServiceTest {
 		Mockito.when(this.repository.existsById(taskId)).thenReturn(true);
 
 		// THEN
-		assertThat(this.service.deleteTask(taskId)).isEqualTo(false);
+		assertThat(this.service.deleteTask(taskId)).isFalse();
 
 		Mockito.verify(this.repository, Mockito.times(1)).existsById(taskId);
 	}

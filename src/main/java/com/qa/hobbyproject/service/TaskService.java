@@ -24,7 +24,7 @@ public class TaskService {
 	}
 
 	public TaskDTO addTask(Long id, TaskDTO taskDTO) {
-		Task task = this.mapper.map(taskDTO, Task.class);
+		var task = this.mapper.map(taskDTO, Task.class);
 		task.setVehicle(new Vehicle(id, "", "", "", "", 0));
 		Task saved = this.repository.save(task);
 		return this.mapper.map(saved, TaskDTO.class);
@@ -35,12 +35,12 @@ public class TaskService {
 	}
 
 	public TaskDTO updateTask(Long id, TaskDTO task) {
-		Task existingTask = this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+		var existingTask = this.repository.findById(id).orElseThrow(EntityNotFoundException::new);
 
 		existingTask.setName(task.getName());
 		existingTask.setDueDate(task.getDueDate());
 
-		Task updatedTask = this.repository.save(existingTask);
+		var updatedTask = this.repository.save(existingTask);
 
 		return this.mapper.map(updatedTask, TaskDTO.class);
 	}

@@ -1,6 +1,7 @@
 package com.qa.hobbyproject.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
@@ -37,7 +38,7 @@ class TaskDTOTest {
 		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
 		TaskDTO task2 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
 
-		assertTrue(task1.hashCode() == task2.hashCode());
+		assertEquals(task1.hashCode(), task2.hashCode());
 	}
 
 	@Test
@@ -89,8 +90,8 @@ class TaskDTOTest {
 
 	@Test
 	void testToString() {
-		String output = "VehicleTaskDTO [id=1, name=MOT, dueDate=2021-07-01]";
-		assertThat(task.toString()).isEqualTo(output);
+		String output = "TaskDTO [id=1, name=MOT, dueDate=2021-07-01]";
+		assertThat(task.toString()).hasToString(output);
 	}
 
 	@Test
