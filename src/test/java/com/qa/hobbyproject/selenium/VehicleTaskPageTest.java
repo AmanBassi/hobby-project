@@ -83,5 +83,22 @@ public class VehicleTaskPageTest {
 		assertEquals("2021-07-01", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[3]")).getText());
 		assertEquals("2021-08-02", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[3]")).getText());
 	}
+	
+	@Test
+	void testUpdate() {
+		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]")));
+		String originalRow = driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]")).getText();
+		driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[4]/button")).click();
+		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"updateVehicleTaskModal\"]")));
+		Select dropdown = new Select(driver.findElement(By.xpath("//*[@id=\"updateName\"]")));
+		dropdown.selectByValue("Road Tax");
+		driver.findElement(By.xpath("//*[@id=\"updateDueDate\"]")).sendKeys("03092021");
+		driver.findElement(By.xpath("//*[@id=\"updateVehicleTaskButton\"]")).click();
+		new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("/html/body/div/main/div[1]/table/tbody/tr"), originalRow));
+		
+		assertEquals("1", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[1]")).getText());
+		assertEquals("Road Tax", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[2]")).getText());
+		assertEquals("2021-09-03", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[3]")).getText());
+	}
 
 }
