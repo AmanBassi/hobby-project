@@ -51,7 +51,7 @@ public class VehiclePageTest {
 	}
 
 	@Test
-	void testCreate() throws InterruptedException {
+	void testCreate() {
 		driver.findElement(By.linkText("Enter system")).click();
 		driver.findElement(By.cssSelector("main > .btn")).click();
 
