@@ -123,8 +123,8 @@
     });
 
     document.getElementById("updateVehicleForm").addEventListener("submit", function (event) {
+        event.preventDefault();
         if (!this.checkValidity()) {
-            event.preventDefault();
             event.stopPropagation();
             console.log("form was not valid");
             return;
@@ -144,6 +144,13 @@
         axios.put(`/vehicle/update/${vehicleId}`, data)
             .then(function (response) {
                 console.log(response);
+                var myModalElement = document.getElementById('updateVehicleModal');
+                var modal = bootstrap.Modal.getInstance(myModalElement);
+                modal.hide();
+
+                document.getElementById("updateVehicleForm").classList.remove('was-validated');
+                document.getElementById("updateVehicleForm").reset();
+                getVehicles();
             })
             .catch(function (error) {
                 console.log(error);
