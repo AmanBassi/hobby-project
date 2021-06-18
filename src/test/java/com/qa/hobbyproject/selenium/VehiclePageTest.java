@@ -42,6 +42,9 @@ public class VehiclePageTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		driver.get("http://localhost:" + serverPort + "/");
+
+		assertEquals("Hobby Project", driver.getTitle());
 	}
 
 	@AfterEach
@@ -50,10 +53,6 @@ public class VehiclePageTest {
 
 	@Test
 	void testCreate() throws InterruptedException {
-		driver.get("http://localhost:" + serverPort + "/");
-
-		assertEquals("Hobby Project", driver.getTitle());
-
 		driver.findElement(By.linkText("Enter system")).click();
 		driver.findElement(By.cssSelector("main > .btn")).click();
 
@@ -78,13 +77,9 @@ public class VehiclePageTest {
 
 	@Test
 	void testRead() {
-		driver.get("http://localhost:" + serverPort + "/");
-
-		assertEquals("Hobby Project", driver.getTitle());
-
 		driver.findElement(By.linkText("Enter system")).click();
 
-		new WebDriverWait(driver, 3).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")));
+		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")));
 
 		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[2]")).getText(), "1");
 		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[3]")).getText(), "PB08 BSB");
@@ -92,6 +87,37 @@ public class VehiclePageTest {
 		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[5]")).getText(), "Macan");
 		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[6]")).getText(), "Blue");
 		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[7]")).getText(), "258");
+	}
+	
+	@Test
+	void testUpdate() {
+		driver.findElement(By.linkText("Enter system")).click();
+		driver.findElement(By.cssSelector(".btn-primary:nth-child(1)")).click();
+		String originalRow = driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")).getText();
+		
+		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"updateVehicleModal\"]")));
+		
+	    driver.findElement(By.id("updateVehicleModal")).click();
+	    driver.findElement(By.id("updateRegistration")).clear();
+	    driver.findElement(By.id("updateRegistration")).sendKeys("BP14 NRE");
+	    driver.findElement(By.id("updateMake")).clear();
+	    driver.findElement(By.id("updateMake")).sendKeys("Suzuki");
+	    driver.findElement(By.id("updateModel")).clear();
+	    driver.findElement(By.id("updateModel")).sendKeys("Swift");
+	    driver.findElement(By.id("updateColour")).clear();
+	    driver.findElement(By.id("updateColour")).sendKeys("Grey");
+	    driver.findElement(By.id("updateHorsePower")).clear();
+	    driver.findElement(By.id("updateHorsePower")).sendKeys("90");
+	    driver.findElement(By.id("updateVehicleButton")).click();
+	    
+	    new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("/html/body/div/main/div[1]/table/tbody/tr"), originalRow));
+
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[2]")).getText(), "1");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[3]")).getText(), "BP14 NRE");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[4]")).getText(), "Suzuki");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[5]")).getText(), "Swift");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[6]")).getText(), "Grey");
+		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr/td[7]")).getText(), "90");		
 	}
 
 }
