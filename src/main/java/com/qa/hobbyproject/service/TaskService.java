@@ -31,7 +31,7 @@ public class TaskService {
 		return this.repository.findAllByVehicleId(id).stream().map(task -> this.mapper.map(task, TaskDTO.class)).collect(Collectors.toList());
 	}
 
-	public TaskDTO updateTask(Long id, Task task) {
+	public TaskDTO updateTask(Long id, TaskDTO task) {
 		Task existingTask = this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException());
 
 		existingTask.setName(task.getName());

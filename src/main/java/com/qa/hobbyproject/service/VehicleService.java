@@ -38,7 +38,7 @@ public class VehicleService {
 		return this.mapper.map(foundVehicle, VehicleDTO.class);
 	}
 
-	public VehicleDTO updateVehicle(Long id, Vehicle vehicle) {
+	public VehicleDTO updateVehicle(Long id, VehicleDTO vehicle) {
 		Vehicle existingVehicle = this.repository.findById(id).orElseThrow(() -> new EntityNotFoundException());
 
 		existingVehicle.setRegistration(vehicle.getRegistration());

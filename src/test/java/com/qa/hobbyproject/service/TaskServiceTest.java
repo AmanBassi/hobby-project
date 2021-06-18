@@ -112,21 +112,22 @@ class TaskServiceTest {
 	@Test
 	void testUpdateTask() {
 		// GIVEN
-		Task existingTask = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
+		Task task = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO existingTask = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
 		Optional<Task> optionalExistingTask = Optional.ofNullable(new Task(1L, "Service", LocalDate.of(2021, 8, 2)));
 		Task updatedTask = new Task(1L, "Service", LocalDate.of(2021, 8, 2));
 		TaskDTO updatedTaskDTO = new TaskDTO(1L, "Service", LocalDate.of(2021, 8, 2));
 
 		// WHEN
 		Mockito.when(this.repository.findById(1L)).thenReturn(optionalExistingTask);
-		Mockito.when(this.repository.save(existingTask)).thenReturn(updatedTask);
+		Mockito.when(this.repository.save(task)).thenReturn(updatedTask);
 		Mockito.when(this.mapper.map(updatedTask, TaskDTO.class)).thenReturn(updatedTaskDTO);
 
 		// THEN
 		assertThat(this.service.updateTask(1L, existingTask)).isEqualTo(updatedTaskDTO);
 
 		Mockito.verify(this.repository, Mockito.times(1)).findById(1L);
-		Mockito.verify(this.repository, Mockito.times(1)).save(existingTask);
+		Mockito.verify(this.repository, Mockito.times(1)).save(task);
 		Mockito.verify(this.mapper, Mockito.times(1)).map(updatedTask, TaskDTO.class);
 	}
 
