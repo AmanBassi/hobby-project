@@ -43,7 +43,6 @@ public class VehiclePageTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		driver.get("http://localhost:" + serverPort + "/");
-
 		assertEquals("Hobby Project", driver.getTitle());
 	}
 
