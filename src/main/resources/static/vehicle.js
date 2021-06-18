@@ -88,8 +88,8 @@
     }
 
     document.getElementById("createVehicleForm").addEventListener("submit", function (event) {
+        event.preventDefault();
         if (!this.checkValidity()) {
-            event.preventDefault();
             event.stopPropagation();
             console.log("form was not valid");
             return;
@@ -108,6 +108,13 @@
         axios.post("/vehicle/create", data)
             .then(function (response) {
                 console.log(response);
+                var myModalElement = document.getElementById('createVehicleModal');
+                var modal = bootstrap.Modal.getInstance(myModalElement);
+                modal.hide();
+
+                document.getElementById("createVehicleForm").classList.remove('was-validated');
+                document.getElementById("createVehicleForm").reset();
+                getVehicles();
             })
             .catch(function (error) {
                 console.log(error);

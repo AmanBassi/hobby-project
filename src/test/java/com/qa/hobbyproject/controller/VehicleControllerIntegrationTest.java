@@ -32,8 +32,7 @@ import com.qa.hobbyproject.domain.Vehicle;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@Sql(scripts = { "classpath:vehicle-schema.sql",
-		"classpath:vehicle-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = { "classpath:vehicle-schema.sql", "classpath:vehicle-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("test")
 class VehicleControllerIntegrationTest {
 
@@ -91,7 +90,7 @@ class VehicleControllerIntegrationTest {
 
 		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
-	
+
 	@Test
 	void testGetVehicleById() throws Exception {
 		Vehicle vehicle = new Vehicle(1L, "PB08 BSB", "Porsche", "Macan", "Blue", 258);
@@ -119,7 +118,7 @@ class VehicleControllerIntegrationTest {
 
 		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
-	
+
 	@Test
 	void testDeleteVehicle() throws Exception {
 		RequestBuilder mockRequest = delete("/vehicle/delete/1");
@@ -127,7 +126,7 @@ class VehicleControllerIntegrationTest {
 		ResultMatcher checkStatus = status().isOk();
 
 		ResultMatcher checkBody = content().string("true");
-		
+
 		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 
