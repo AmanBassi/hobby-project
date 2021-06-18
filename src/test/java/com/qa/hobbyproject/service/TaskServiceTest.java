@@ -64,14 +64,16 @@ class TaskServiceTest {
 		TaskDTO savedTask = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
 
 		// GIVEN
+		TaskDTO taskDTO = new TaskDTO(null, "MOT", LocalDate.of(2021, 7, 1));
 		Task task = new Task("MOT", LocalDate.of(2021, 7, 1));
-
+		
 		// WHEN
+		Mockito.when(this.mapper.map(taskDTO, Task.class)).thenReturn(task);
 		Mockito.when(this.repository.save(task)).thenReturn(createdTask);
 		Mockito.when(this.mapper.map(createdTask, TaskDTO.class)).thenReturn(savedTask);
 
 		// THEN
-		assertThat(this.service.addTask(task)).isEqualTo(savedTask);
+		assertThat(this.service.addTask(1L, taskDTO)).isEqualTo(savedTask);
 
 		Mockito.verify(this.repository, Mockito.times(1)).save(task);
 		Mockito.verify(this.mapper, Mockito.times(1)).map(createdTask, TaskDTO.class);

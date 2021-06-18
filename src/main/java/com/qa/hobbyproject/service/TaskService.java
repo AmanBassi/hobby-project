@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.qa.hobbyproject.domain.Task;
+import com.qa.hobbyproject.domain.Vehicle;
 import com.qa.hobbyproject.dto.TaskDTO;
 import com.qa.hobbyproject.repository.TaskRepository;
 
@@ -22,8 +23,10 @@ public class TaskService {
 		this.mapper = mapper;
 	}
 
-	public TaskDTO addTask(Task task) {
-		Task saved = this.repository.save(task);
+	public TaskDTO addTask(Long id, TaskDTO task) {
+		Task t = this.mapper.map(task, Task.class);
+		t.setVehicle(new Vehicle(id, "", "", "", "", 0));
+		Task saved = this.repository.save(t);
 		return this.mapper.map(saved, TaskDTO.class);
 	}
 

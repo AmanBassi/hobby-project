@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.hobbyproject.domain.Task;
 import com.qa.hobbyproject.dto.TaskDTO;
 import com.qa.hobbyproject.service.TaskService;
 
@@ -28,9 +27,9 @@ public class TaskController {
 	}
 
 	// Create
-	@PostMapping("/create")
-	public TaskDTO addTask(@RequestBody Task task) {
-		return this.service.addTask(task);
+	@PostMapping("/create/{vehicleId}")
+	public TaskDTO addTask(@PathVariable Long vehicleId, @RequestBody TaskDTO task) {
+		return this.service.addTask(vehicleId, task);
 	}
 
 	// Read

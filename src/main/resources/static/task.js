@@ -101,11 +101,10 @@
 
         const data = {
             name: this.name.value,
-            dueDate: this.dueDate.value,
-            vehicle: { id: vehicleId }
+            dueDate: this.dueDate.value
         }
 
-        axios.post("/task/create", data)
+        axios.post(`/task/create/${vehicleId}`, data)
             .then(function (response) {
                 console.log(response);
                 var myModalElement = document.getElementById('createTaskModal');

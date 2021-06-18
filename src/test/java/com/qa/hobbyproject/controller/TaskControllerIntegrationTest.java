@@ -70,7 +70,7 @@ class TaskControllerIntegrationTest {
 		String taskAsJSON = this.mapper.writeValueAsString(task);
 		String createdtaskAsJSON = this.mapper.writeValueAsString(createdTask);
 
-		RequestBuilder mockRequest = post("/task/create").content(taskAsJSON).contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder mockRequest = post("/task/create/1").content(taskAsJSON).contentType(MediaType.APPLICATION_JSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
