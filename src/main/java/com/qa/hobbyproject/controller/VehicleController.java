@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.hobbyproject.domain.Vehicle;
 import com.qa.hobbyproject.dto.VehicleDTO;
 import com.qa.hobbyproject.service.VehicleService;
 
@@ -29,7 +28,7 @@ public class VehicleController {
 
 	// Create
 	@PostMapping("/create")
-	public VehicleDTO addVehicle(@RequestBody Vehicle vehicle) {
+	public VehicleDTO addVehicle(@RequestBody VehicleDTO vehicle) {
 		return this.service.addVehicle(vehicle);
 	}
 
@@ -46,7 +45,7 @@ public class VehicleController {
 
 	// Update
 	@PutMapping("/update/{id}")
-	public VehicleDTO updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
+	public VehicleDTO updateVehicle(@PathVariable Long id, @RequestBody VehicleDTO vehicle) {
 		return this.service.updateVehicle(id, vehicle);
 	}
 

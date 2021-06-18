@@ -24,7 +24,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Sql(scripts = { "classpath:vehicle-schema.sql", "classpath:vehicle-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("test")
-public class VehiclePageTest {
+class VehiclePageTest {
 
 	private static WebDriver driver;
 
@@ -94,6 +94,7 @@ public class VehiclePageTest {
 	@Test
 	void testUpdate() {
 		driver.findElement(By.linkText("Enter system")).click();
+		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")));
 		driver.findElement(By.cssSelector(".btn-primary:nth-child(1)")).click();
 		String originalRow = driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")).getText();
 

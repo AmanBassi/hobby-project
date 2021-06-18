@@ -30,15 +30,14 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.hobbyproject.domain.Vehicle;
-import com.qa.hobbyproject.domain.VehicleTask;
-import com.qa.hobbyproject.dto.VehicleTaskDTO;
+import com.qa.hobbyproject.domain.Task;
+import com.qa.hobbyproject.dto.TaskDTO;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@Sql(scripts = { "classpath:task-schema.sql",
-		"classpath:task-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = { "classpath:task-schema.sql", "classpath:task-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @ActiveProfiles("test")
-class VehicleTaskControllerIntegrationTest {
+class TaskControllerIntegrationTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -63,16 +62,15 @@ class VehicleTaskControllerIntegrationTest {
 	}
 
 	@Test
-	void testAddVehicleTask() throws Exception {
+	void testAddTask() throws Exception {
 		Vehicle vehicle = new Vehicle(1L, null, null, null, null, 0);
-		VehicleTask task = new VehicleTask("MOT", LocalDate.of(2021, 7, 1), vehicle);
-		VehicleTaskDTO createdTask = new VehicleTaskDTO(3L, "MOT", LocalDate.of(2021, 7, 1));
+		Task task = new Task("MOT", LocalDate.of(2021, 7, 1), vehicle);
+		TaskDTO createdTask = new TaskDTO(3L, "MOT", LocalDate.of(2021, 7, 1));
 
 		String taskAsJSON = this.mapper.writeValueAsString(task);
 		String createdtaskAsJSON = this.mapper.writeValueAsString(createdTask);
 
-		RequestBuilder mockRequest = post("/vehicletask/create").content(taskAsJSON)
-				.contentType(MediaType.APPLICATION_JSON);
+		RequestBuilder mockRequest = post("/task/create/1").content(taskAsJSON).contentType(MediaType.APPLICATION_JSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
@@ -83,14 +81,14 @@ class VehicleTaskControllerIntegrationTest {
 
 	@Test
 	void testGetAll() throws Exception {
-		VehicleTaskDTO task1 = new VehicleTaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
-		VehicleTaskDTO task2 = new VehicleTaskDTO(2L, "Service", LocalDate.of(2021, 8, 2));
-		List<VehicleTaskDTO> tasks = new ArrayList<>();
+		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO task2 = new TaskDTO(2L, "Service", LocalDate.of(2021, 8, 2));
+		List<TaskDTO> tasks = new ArrayList<>();
 		tasks.add(task1);
 		tasks.add(task2);
 		String tasksAsJSON = this.mapper.writeValueAsString(tasks);
 
-		RequestBuilder mockRequest = get("/vehicletask/getAllByVehicle/1");
+		RequestBuilder mockRequest = get("/task/getAllByVehicle/1");
 
 		ResultMatcher checkStatus = status().isOk();
 
@@ -100,16 +98,15 @@ class VehicleTaskControllerIntegrationTest {
 	}
 
 	@Test
-	void testUpdateVehicleTask() throws Exception {
+	void testUpdateTask() throws Exception {
 		Vehicle vehicle = new Vehicle(1L, null, null, null, null, 0);
-		VehicleTask task = new VehicleTask(1L, "Insurance", LocalDate.of(2021, 9, 3), vehicle);
-		VehicleTaskDTO taskDTO = new VehicleTaskDTO(1L, "Insurance", LocalDate.of(2021, 9, 3));
-		
+		Task task = new Task(1L, "Insurance", LocalDate.of(2021, 9, 3), vehicle);
+		TaskDTO taskDTO = new TaskDTO(1L, "Insurance", LocalDate.of(2021, 9, 3));
+
 		String taskAsJSON = this.mapper.writeValueAsString(task);
 		String taskDTOAsJSON = this.mapper.writeValueAsString(taskDTO);
 
-		RequestBuilder mockRequest = put("/vehicletask/update/1").contentType(MediaType.APPLICATION_JSON)
-				.content(taskAsJSON);
+		RequestBuilder mockRequest = put("/task/update/1").contentType(MediaType.APPLICATION_JSON).content(taskAsJSON);
 
 		ResultMatcher checkStatus = status().isOk();
 
@@ -119,13 +116,13 @@ class VehicleTaskControllerIntegrationTest {
 	}
 
 	@Test
-	void testDeleteVehicleTask() throws Exception {
-		RequestBuilder mockRequest = delete("/vehicletask/delete/1");
+	void testDeleteTask() throws Exception {
+		RequestBuilder mockRequest = delete("/task/delete/1");
 
 		ResultMatcher checkStatus = status().isOk();
 
 		ResultMatcher checkBody = content().string("true");
-		
+
 		this.mvc.perform(mockRequest).andExpect(checkStatus).andExpect(checkBody);
 	}
 
