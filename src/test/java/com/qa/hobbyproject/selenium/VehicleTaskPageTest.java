@@ -45,6 +45,9 @@ public class VehicleTaskPageTest {
 	void setUp() throws Exception {
 		driver.get("http://localhost:" + serverPort + "/");
 		assertEquals("Hobby Project", driver.getTitle());
+		driver.findElement(By.linkText("Enter system")).click();
+		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")));
+		driver.findElement(By.linkText("Open")).click();
 	}
 
 	@AfterEach
@@ -53,9 +56,6 @@ public class VehicleTaskPageTest {
 
 	@Test
 	void testCreate() {
-		driver.findElement(By.linkText("Enter system")).click();
-		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")));
-		driver.findElement(By.linkText("Open")).click();
 		driver.findElement(By.xpath("/html/body/div/main/button")).click();
 		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"createVehicleTaskModal\"]")));
 		Select dropdown = new Select(driver.findElement(By.xpath("//*[@id=\"name\"]")));
@@ -65,9 +65,23 @@ public class VehicleTaskPageTest {
 
 		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]")));
 
-		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[1]")).getText(), "3");
-		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[2]")).getText(), "Insurance");
-		assertEquals(driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[3]")).getText(), "2021-12-01");
+		assertEquals("3", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[1]")).getText());
+		assertEquals("Insurance", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[2]")).getText());
+		assertEquals("2021-12-01", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[3]")).getText());
+	}
+
+	@Test
+	void testRead() {
+		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]")));
+
+		assertEquals(2, driver.findElements(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")).size());
+
+		assertEquals("1", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[1]")).getText());
+		assertEquals("2", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[1]")).getText());
+		assertEquals("MOT", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[2]")).getText());
+		assertEquals("Service", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[2]")).getText());
+		assertEquals("2021-07-01", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[3]")).getText());
+		assertEquals("2021-08-02", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[3]")).getText());
 	}
 
 }
