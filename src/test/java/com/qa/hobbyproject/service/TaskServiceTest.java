@@ -60,13 +60,13 @@ class TaskServiceTest {
 
 	@Test
 	void testAddTask() {
-		Task createdTask = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
-		TaskDTO savedTask = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		Task createdTask = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		TaskDTO savedTask = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
 
 		// GIVEN
-		TaskDTO taskDTO = new TaskDTO(null, "MOT", LocalDate.of(2021, 7, 1));
-		Task task = new Task("MOT", LocalDate.of(2021, 7, 1));
-		
+		TaskDTO taskDTO = new TaskDTO(null, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		Task task = new Task("MOT", LocalDate.of(2021, 7, 1), "Due");
+
 		// WHEN
 		Mockito.when(this.mapper.map(taskDTO, Task.class)).thenReturn(task);
 		Mockito.when(this.repository.save(task)).thenReturn(createdTask);
@@ -84,16 +84,16 @@ class TaskServiceTest {
 		// GIVEN
 		List<Task> tasks = new ArrayList<>();
 
-		Task task1 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
-		Task task2 = new Task(2L, "Service", LocalDate.of(2021, 8, 2));
+		Task task1 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		Task task2 = new Task(2L, "Service", LocalDate.of(2021, 8, 2), "Booked");
 
 		tasks.add(task1);
 		tasks.add(task2);
 
 		List<TaskDTO> taskDTOs = new ArrayList<>();
 
-		TaskDTO taskDTO1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
-		TaskDTO taskDTO2 = new TaskDTO(2L, "Service", LocalDate.of(2021, 8, 2));
+		TaskDTO taskDTO1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		TaskDTO taskDTO2 = new TaskDTO(2L, "Service", LocalDate.of(2021, 8, 2), "Booked");
 
 		taskDTOs.add(taskDTO1);
 		taskDTOs.add(taskDTO2);
@@ -114,11 +114,11 @@ class TaskServiceTest {
 	@Test
 	void testUpdateTask() {
 		// GIVEN
-		Task task = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
-		TaskDTO existingTask = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
-		Optional<Task> optionalExistingTask = Optional.ofNullable(new Task(1L, "Service", LocalDate.of(2021, 8, 2)));
-		Task updatedTask = new Task(1L, "Service", LocalDate.of(2021, 8, 2));
-		TaskDTO updatedTaskDTO = new TaskDTO(1L, "Service", LocalDate.of(2021, 8, 2));
+		Task task = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		TaskDTO existingTask = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		Optional<Task> optionalExistingTask = Optional.ofNullable(new Task(1L, "Service", LocalDate.of(2021, 8, 2), "Due"));
+		Task updatedTask = new Task(1L, "Service", LocalDate.of(2021, 8, 2), "Booked");
+		TaskDTO updatedTaskDTO = new TaskDTO(1L, "Service", LocalDate.of(2021, 8, 2), "Booked");
 
 		// WHEN
 		Mockito.when(this.repository.findById(1L)).thenReturn(optionalExistingTask);

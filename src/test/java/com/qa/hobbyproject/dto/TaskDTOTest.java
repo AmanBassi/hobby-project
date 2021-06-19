@@ -26,7 +26,7 @@ class TaskDTOTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		task = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		task = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
 	}
 
 	@AfterEach
@@ -35,8 +35,8 @@ class TaskDTOTest {
 
 	@Test
 	void testHashCode() {
-		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
-		TaskDTO task2 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		TaskDTO task2 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
 
 		assertEquals(task1.hashCode(), task2.hashCode());
 	}
@@ -50,7 +50,7 @@ class TaskDTOTest {
 
 	@Test
 	void testVehicleTaskDTOLongStringLocalDate() {
-		TaskDTO task = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO task = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
 
 		assertThat(task).isInstanceOf(TaskDTO.class);
 	}
@@ -90,14 +90,14 @@ class TaskDTOTest {
 
 	@Test
 	void testToString() {
-		String output = "TaskDTO [id=1, name=MOT, dueDate=2021-07-01]";
+		String output = "TaskDTO [id=1, name=MOT, dueDate=2021-07-01, status=Due]";
 		assertThat(task.toString()).hasToString(output);
 	}
 
 	@Test
 	void testEqualsObject() {
-		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
-		TaskDTO task2 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
+		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		TaskDTO task2 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
 
 		assertTrue(task1.equals(task2) && task2.equals(task1));
 	}
