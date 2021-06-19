@@ -50,6 +50,7 @@
         updateButton.addEventListener("click", function (event) {
             document.getElementById("updateName").value = task.name;
             document.getElementById("updateDueDate").value = task.dueDate;
+            document.getElementById("updateStatus").value = task.status;
             document.getElementById("updateTaskButton").setAttribute("taskId", task.id);
         });
 
@@ -79,6 +80,7 @@
         tableRow.appendChild(createTableCell(task.id));
         tableRow.appendChild(createTableCell(task.name));
         tableRow.appendChild(createTableCell(task.dueDate));
+        tableRow.appendChild(createTableCell(task.status));
         tableRow.appendChild(createUpdateButton(task));
         tableRow.appendChild(createDeleteButton(task.id));
 
@@ -101,7 +103,8 @@
 
         const data = {
             name: this.name.value,
-            dueDate: this.dueDate.value
+            dueDate: this.dueDate.value,
+            status: this.status.value
         }
 
         axios.post(`/task/create/${vehicleId}`, data)
@@ -134,7 +137,8 @@
         const taskId = document.getElementById("updateTaskButton").getAttribute("taskId");
         const data = {
             name: this.updateName.value,
-            dueDate: this.updateDueDate.value
+            dueDate: this.updateDueDate.value,
+            status: this.updateStatus.value
         }
 
         axios.put(`/task/update/${taskId}`, data)

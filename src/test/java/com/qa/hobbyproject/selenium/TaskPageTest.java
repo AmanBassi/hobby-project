@@ -60,9 +60,11 @@ class TaskPageTest {
 	void testCreate() {
 		driver.findElement(By.xpath("/html/body/div/main/button")).click();
 		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"createTaskModal\"]")));
-		Select dropdown = new Select(driver.findElement(By.xpath("//*[@id=\"name\"]")));
-		dropdown.selectByValue("Insurance");
+		Select taskDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"name\"]")));
+		taskDropdown.selectByValue("Insurance");
 		driver.findElement(By.xpath("//*[@id=\"dueDate\"]")).sendKeys("01122021");
+		Select statusDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"status\"]")));
+		statusDropdown.selectByValue("Booked");
 		driver.findElement(By.xpath("//*[@id=\"createTaskModal\"]/div/div/div[3]/button[2]")).click();
 
 		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]")));
@@ -70,6 +72,7 @@ class TaskPageTest {
 		assertEquals("3", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[1]")).getText());
 		assertEquals("Insurance", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[2]")).getText());
 		assertEquals("2021-12-01", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[3]")).getText());
+		assertEquals("Booked", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[3]/td[4]")).getText());
 	}
 
 	@Test
@@ -84,23 +87,28 @@ class TaskPageTest {
 		assertEquals("Service", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[2]")).getText());
 		assertEquals("2021-07-01", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[3]")).getText());
 		assertEquals("2021-08-02", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[3]")).getText());
+		assertEquals("Due", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[4]")).getText());
+		assertEquals("Booked", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[2]/td[4]")).getText());
 	}
 
 	@Test
 	void testUpdate() {
 		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]")));
 		String originalRow = driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]")).getText();
-		driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[4]/button")).click();
+		driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[5]/button")).click();
 		new WebDriverWait(driver, 3).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"updateTaskModal\"]")));
-		Select dropdown = new Select(driver.findElement(By.xpath("//*[@id=\"updateName\"]")));
-		dropdown.selectByValue("Road Tax");
+		Select taskDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"updateName\"]")));
+		taskDropdown.selectByValue("Road Tax");
 		driver.findElement(By.xpath("//*[@id=\"updateDueDate\"]")).sendKeys("03092021");
+		Select statusDropdown = new Select(driver.findElement(By.xpath("//*[@id=\"updateStatus\"]")));
+		statusDropdown.selectByValue("Booked");
 		driver.findElement(By.xpath("//*[@id=\"updateTaskButton\"]")).click();
 		new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]"), originalRow));
 
 		assertEquals("1", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[1]")).getText());
 		assertEquals("Road Tax", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[2]")).getText());
 		assertEquals("2021-09-03", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[3]")).getText());
+		assertEquals("Booked", driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[4]")).getText());
 	}
 
 	@Test
@@ -109,7 +117,7 @@ class TaskPageTest {
 		String originalRow = driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]")).getText();
 		assertEquals(2, driver.findElements(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")).size());
 
-		driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[5]/button")).click();
+		driver.findElement(By.xpath("/html/body/div/main/div[1]/table/tbody/tr[1]/td[6]/button")).click();
 
 		new WebDriverWait(driver, 3).until(ExpectedConditions.invisibilityOfElementWithText(By.xpath("/html/body/div/main/div[1]/table/tbody/tr"), originalRow));
 		assertEquals(1, driver.findElements(By.xpath("/html/body/div/main/div[1]/table/tbody/tr")).size());

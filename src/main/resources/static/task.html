@@ -38,6 +38,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Task</th>
                             <th scope="col">Due Date</th>
+                            <th scope="col">Status</th>
                             <th scope="col" class="w-0"></th>
                             <th scope="col" class="w-0"></th>
                         </tr>
@@ -61,7 +62,7 @@
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label for="name" class="form-label">Task</label>
-                                        <select class="form-select" aria-label="name" id="name" required="">
+                                        <select class="form-select" aria-label="name" id="name">
                                             <option value="MOT">MOT</option>
                                             <option value="Road Tax">Road Tax</option>
                                             <option value="Insurance">Insurance</option>
@@ -71,13 +72,20 @@
                                             Valid vehicle task is required.
                                         </div>
                                     </div>
-
                                     <div class="col-12">
                                         <label for="dueDate" class="form-label">Task Due Date</label>
-                                        <input type="date" class="form-control" id="dueDate" placeholder="" value="" required="">
+                                        <input type="date" class="form-control" id="dueDate" value="" required="">
                                         <div class="invalid-feedback">
                                             Valid task due date is required.
                                         </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="status" class="form-label">Status</label>
+                                        <select class="form-select" aria-label="status" id="status">
+                                            <option value="Due">Due</option>
+                                            <option value="Booked">Booked</option>
+                                            <option value="Completed">Completed</option>
+                                        </select>
                                     </div>
                                 </div>
                             </form>
@@ -102,8 +110,8 @@
                             <form id="updateTaskForm" class="needs-validation" novalidate="">
                                 <div class="row g-3">
                                     <div class="col-12">
-                                        <label for="name" class="form-label">Task</label>
-                                        <select class="form-select" aria-label="name" id="updateName" required="">
+                                        <label for="updateName" class="form-label">Task</label>
+                                        <select class="form-select" aria-label="updateName" id="updateName">
                                             <option value="MOT">MOT</option>
                                             <option value="Road Tax">Road Tax</option>
                                             <option value="Insurance">Insurance</option>
@@ -115,10 +123,21 @@
                                     </div>
 
                                     <div class="col-12">
-                                        <label for="dueDate" class="form-label">Task Due Date</label>
-                                        <input type="date" class="form-control" id="updateDueDate" placeholder="" value="" required="">
+                                        <label for="updateDueDate" class="form-label">Task Due Date</label>
+                                        <input type="date" class="form-control" id="updateDueDate" value="" required="">
                                         <div class="invalid-feedback">
                                             Valid task due date is required.
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="updateStatus" class="form-label">Status</label>
+                                        <select class="form-select" aria-label="updateStatus" id="updateStatus">
+                                            <option value="Due">Due</option>
+                                            <option value="Booked">Booked</option>
+                                            <option value="Completed">Completed</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Valid task status is required.
                                         </div>
                                     </div>
                                 </div>
