@@ -64,8 +64,8 @@ class TaskControllerIntegrationTest {
 	@Test
 	void testAddTask() throws Exception {
 		Vehicle vehicle = new Vehicle(1L, null, null, null, null, 0);
-		Task task = new Task("MOT", LocalDate.of(2021, 7, 1), vehicle);
-		TaskDTO createdTask = new TaskDTO(3L, "MOT", LocalDate.of(2021, 7, 1));
+		Task task = new Task("MOT", LocalDate.of(2021, 7, 1), "Due", vehicle);
+		TaskDTO createdTask = new TaskDTO(3L, "MOT", LocalDate.of(2021, 7, 1), "Due");
 
 		String taskAsJSON = this.mapper.writeValueAsString(task);
 		String createdtaskAsJSON = this.mapper.writeValueAsString(createdTask);
@@ -81,8 +81,8 @@ class TaskControllerIntegrationTest {
 
 	@Test
 	void testGetAll() throws Exception {
-		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1));
-		TaskDTO task2 = new TaskDTO(2L, "Service", LocalDate.of(2021, 8, 2));
+		TaskDTO task1 = new TaskDTO(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		TaskDTO task2 = new TaskDTO(2L, "Service", LocalDate.of(2021, 8, 2), "Booked");
 		List<TaskDTO> tasks = new ArrayList<>();
 		tasks.add(task1);
 		tasks.add(task2);
@@ -100,8 +100,8 @@ class TaskControllerIntegrationTest {
 	@Test
 	void testUpdateTask() throws Exception {
 		Vehicle vehicle = new Vehicle(1L, null, null, null, null, 0);
-		Task task = new Task(1L, "Insurance", LocalDate.of(2021, 9, 3), vehicle);
-		TaskDTO taskDTO = new TaskDTO(1L, "Insurance", LocalDate.of(2021, 9, 3));
+		Task task = new Task(1L, "Insurance", LocalDate.of(2021, 9, 3), "Due", vehicle);
+		TaskDTO taskDTO = new TaskDTO(1L, "Insurance", LocalDate.of(2021, 9, 3), "Due");
 
 		String taskAsJSON = this.mapper.writeValueAsString(task);
 		String taskDTOAsJSON = this.mapper.writeValueAsString(taskDTO);

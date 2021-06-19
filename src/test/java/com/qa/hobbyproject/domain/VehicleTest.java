@@ -31,7 +31,7 @@ class VehicleTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		List<Task> tasks = new ArrayList<>();
-		tasks.add(new Task(1L, "MOT", LocalDate.of(2021, 7, 1)));
+		tasks.add(new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due"));
 		vehicle = new Vehicle(1L, "FE65 PKK", "VW", "Golf", "Black", 220, tasks);
 	}
 
@@ -110,7 +110,7 @@ class VehicleTest {
 	@Test
 	void testGetTasks() {
 		List<Task> tasks1 = new ArrayList<>();
-		tasks1.add(new Task(1L, "MOT", LocalDate.of(2021, 7, 1)));
+		tasks1.add(new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due"));
 		assertThat(vehicle.getTasks()).isEqualTo(tasks1);
 	}
 
@@ -153,14 +153,14 @@ class VehicleTest {
 	@Test
 	void testSetTasks() {
 		List<Task> tasks = new ArrayList<>();
-		tasks.add(new Task(1L, "Service", LocalDate.of(2021, 8, 2)));
+		tasks.add(new Task(1L, "Service", LocalDate.of(2021, 8, 2), "Due"));
 		vehicle.setTasks(tasks);
 		assertThat(vehicle.getTasks()).isEqualTo(tasks);
 	}
 
 	@Test
 	void testToString() {
-		String output = "Vehicle [id=1, registration=FE65 PKK, make=VW, model=Golf, colour=Black, horsePower=220, tasks=[Task [id=1, name=MOT, dueDate=2021-07-01, vehicle=null]]]";
+		String output = "Vehicle [id=1, registration=FE65 PKK, make=VW, model=Golf, colour=Black, horsePower=220, tasks=[Task [id=1, name=MOT, dueDate=2021-07-01, status=Due, vehicle=null]]]";
 		assertThat(vehicle.toString()).hasToString(output);
 	}
 

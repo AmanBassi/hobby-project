@@ -25,7 +25,7 @@ class TaskTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		task = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), new Vehicle());
+		task = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due", new Vehicle());
 	}
 
 	@AfterEach
@@ -34,43 +34,43 @@ class TaskTest {
 
 	@Test
 	void testHashCode() {
-		Task task1 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
-		Task task2 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
+		Task task1 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		Task task2 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
 
 		assertEquals(task1.hashCode(), task2.hashCode());
 	}
 
 	@Test
-	void testVehicleTask() {
+	void testTask() {
 		Task vt = new Task();
 
 		assertThat(vt).isInstanceOf(Task.class);
 	}
 
 	@Test
-	void testVehicleTaskStringLocalDate() {
-		Task vt = new Task("MOT", LocalDate.of(2021, 7, 1));
+	void testTaskStringLocalDateString() {
+		Task vt = new Task("MOT", LocalDate.of(2021, 7, 1), "Due");
 
 		assertThat(vt).isInstanceOf(Task.class);
 	}
 
 	@Test
-	void testVehicleTaskLongStringLocalDate() {
-		Task vt = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
+	void testTaskLongStringLocalDateString() {
+		Task vt = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
 
 		assertThat(vt).isInstanceOf(Task.class);
 	}
 
 	@Test
-	void testVehicleTaskStringLocalDateVehicle() {
-		Task vt = new Task("MOT", LocalDate.of(2021, 7, 1), new Vehicle());
+	void testTaskStringLocalDateStringVehicle() {
+		Task vt = new Task("MOT", LocalDate.of(2021, 7, 1), "Due", new Vehicle());
 
 		assertThat(vt).isInstanceOf(Task.class);
 	}
 
 	@Test
-	void testVehicleTaskLongStringLocalDateVehicle() {
-		Task vt = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), new Vehicle());
+	void testTaskLongStringLocalDateStringVehicle() {
+		Task vt = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due", new Vehicle());
 
 		assertThat(vt).isInstanceOf(Task.class);
 	}
@@ -122,14 +122,14 @@ class TaskTest {
 
 	@Test
 	void testToString() {
-		String output = "Task [id=1, name=MOT, dueDate=2021-07-01, vehicle=Vehicle [id=null, registration=null, make=null, model=null, colour=null, horsePower=0, tasks=null]]";
+		String output = "Task [id=1, name=MOT, dueDate=2021-07-01, status=Due, vehicle=Vehicle [id=null, registration=null, make=null, model=null, colour=null, horsePower=0, tasks=null]]";
 		assertThat(task.toString()).hasToString(output);
 	}
 
 	@Test
 	void testEqualsObject() {
-		Task task1 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
-		Task task2 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1));
+		Task task1 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
+		Task task2 = new Task(1L, "MOT", LocalDate.of(2021, 7, 1), "Due");
 
 		assertTrue(task1.equals(task2) && task2.equals(task1));
 	}

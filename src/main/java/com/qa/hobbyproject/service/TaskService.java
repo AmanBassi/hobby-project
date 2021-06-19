@@ -39,6 +39,7 @@ public class TaskService {
 
 		existingTask.setName(task.getName());
 		existingTask.setDueDate(task.getDueDate());
+		existingTask.setStatus(task.getStatus());
 
 		var updatedTask = this.repository.save(existingTask);
 
