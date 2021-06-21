@@ -1,0 +1,142 @@
+*   348282e (HEAD -> main, origin/main) Merge pull request #16 from AmanBassi/dev
+|\  
+| * abd6c69 (origin/dev, dev) Updated README file
+| * c4edccd Create README.md
+* | ac81604 Merge branch 'dev'
+|\| 
+| *   26ba02a Merge pull request #15 from AmanBassi/refactoring-2
+| |\  
+| | * 2baf70b (origin/refactoring-2, refactoring-2) Declared some local variables as var following sonarqube recommendation
+| |/  
+* | 6de1aef Merge pull request #14 from AmanBassi/dev
+|\| 
+| *   be736fc Merge pull request #13 from AmanBassi/task-status
+| |\  
+| | * 329e47b (origin/task-status, task-status) Added status variable to task object and tested
+| |/  
+* | 422c903 Merge pull request #12 from AmanBassi/dev
+|\| 
+| *   0dd6fb4 Merge pull request #11 from AmanBassi/refactoring
+| |\  
+| | * 2f1618d (origin/refactoring, refactoring) Sonarqube refactor possible suggestions carried out
+| | * 37fc09a Vehicle create method updated to take in vehicle DTO
+| | * 7925cbb Task create method updated take in DTOs
+| | * ef39f2a Vehicle and Task update method take in DTOs
+| | * 883b8ef Renamed VehicleTask to Task better readability
+| | * b97624e Updated web test for task update
+| | * 5e4d96a Added dependancy for sonarqube test coverage feature
+| | * cd5ed44 Added dependancy for sonarqube test coverage feature
+| |/  
+| *   bb2489a Merge pull request #10 from AmanBassi/selenium
+| |\  
+| | * 5053418 (origin/selenium, selenium) Added chrome driver config so it does not open a new window while testing
+| | * 5db0aa9 Created selenium test case for updating a task
+| | * 65bcebb Created selenium test case for reading vehicle tasks in the system
+| | * 6ecbddb Created selenium test case for creating a vehicle task in the system
+| | * eedaad6 Created new file for web testing vehicle tasks
+| | * 5b27e72 Created selenium test case for deleting a vehicle in the system
+| | * dbd3cdd Created selenium test case for updating a row
+| | * 48ef3ca Fixed Bug where on update changes will only show on page refresh
+| | * 2702125 Updated create vehicle test case to check details in whole table row
+| | * c549138 Added selenium to the project and created a test case for creating a vehicle
+| |/  
+| *   f6c38d7 Merge pull request #9 from AmanBassi/testing
+| |\  
+| | * 2abd9bd (origin/testing, testing) Created and implemented task dto test cases
+| | * 1d53db9 Create test cases for to string methods to improve coverage
+| | * 999d78e Created and implemented test cases for vehicle dto
+| | * 816fa86 Created and implemented unit test for the vehicle task class
+| | * 486ec82 Created and implemented test cases for the vehicle domain
+| | * 5d5e329 Created and implemented test cases for getting single object by id
+| | * 43bca49 Create test case for task delete service
+| | * c514899 Create test case for task update service
+| | * fcf5b9e Implemented get all tasks test
+| | * dd5ec57 Removed some unused imports
+| | * 60402ba Implemented test cases for all methods in the vehicle task service class
+| | * 6b957b2 Create JUnit test file for vehicle task service and tested the create method
+| | * 261cb2a Create a construtor without the id to help testing
+| |/  
+| *   3c4b090 Merge pull request #8 from AmanBassi/task-delete
+| |\  
+| | * 9f4d7e2 (origin/task-delete, task-delete) Created delete buttons for vehicle tasks
+| | * ae9f286 Created and implemented task delete in controller and service
+| |/  
+| *   32d77ff Merge pull request #7 from AmanBassi/task-update
+| |\  
+| | * a5349e2 (origin/task-update, task-update) Created web form to update task details
+| | * f2cdf64 Created controller and service methods for the task update feature
+| |/  
+| *   29f2dbb Merge pull request #6 from AmanBassi/task-read
+| |\  
+| | * 0195aa9 (origin/task-read, task-read) Created table on task page to show all tasks one vehicle has
+| | * d336741 Added ID column to vehicle table
+| | * c422eb6 Created get all tasks by vehicle id
+| |/  
+| *   f2f4c7e (origin/create-read) Merge pull request #5 from AmanBassi/task-create
+| |\  
+| | * 97ab309 (origin/task-create, task-create) Created and implemented add vehicle task form
+| | * af159e9 Added setter and getter for task vehicle property
+| | * cf98cba Created simple task page which shows the vehicle properties
+| | * 6233037 Updated vehicle table with links to open new tasks page for each vehicle
+| | * 2776936 Created method to find a single vehicle by id
+| | * ad5747e Added request mapping for adding vehicle task to the system
+| | * 826b877 Updated all resquest urls to use new path with vehicle prepended to the request
+| | * 4397de3 Added request mapping to controller to avoid conflicts with other rest controllers
+| | * ca25d7e Create empty vehicle task rest controller
+| | * 4ac5bc8 Added create vehicle task method to vehicle task service
+| | * ef30c0f Created vehicle task data transfer object for use in service
+| | * 6775c7f Created empty vehicle task service class
+| | * 1780d7c Created interface for vehicle tasks
+| | * 8bf4299 Renamed Task class to VehicleTask, more readable and less conflicts with java
+| | * 06a74a1 Added swagger to automatically generate documentation for APIs
+| | * a134ffa Updated vehicle class with new list of tasks attribute with new construtor
+| | * 7f5a7c0 Create new task class
+| |/  
+| *   0f6f7fc Merge pull request #4 from AmanBassi/vehicle-delete
+| |\  
+| | * a8ce465 (origin/vehicle-delete, vehicle-delete) Created and implemented test case for delete method in the vehicle controller
+| | * 2bb287d Created and implemented a test case for the delete vehicle service
+| | * b44c31d Created and implemented delete buttons for each vehicle
+| | * 3c1729d Created and implemented vehicle delete methods in controller and service
+| |/  
+| *   2c44786 Merge pull request #3 from AmanBassi/vehicle-update
+| |\  
+| | * d0c1f28 (origin/vehicle-update, vehicle-update) Created and implemented test cases for updating vehicle
+| | * b35e7ab Created and implemented web update form for vehicles
+| | * 6a3ea42 Created new style.css to provide some utility css classes like width 0 class
+| | * 5364c26 Created and implemented update methods in controller and service
+| |/  
+| *   bdc3843 Merge pull request #2 from AmanBassi/vehicle-read
+| |\  
+| | * ccb33ba (origin/vehicle-read, vehicle-read) Created test case for get all vehicles in controller
+| | * 18a1d8f Created test resources for sql schema and data
+| | * f8e9f8b Created test case for find all vehicles
+| | * a6a0a49 Updated vehicle html and js to show table of all vehicles in the system
+| | * 073b22f Renamed get all vehicles request from / to /getall
+| | * fc67f6c Created and implemented read all methods in controller and service
+| |/  
+| * 94ace8e Merge pull request #1 from AmanBassi/vehicle-create
+|/| 
+| * dcbbd89 (origin/vehicle-create, vehicle-create) Updated application properties to not create and drop on every run but update if changes are found to preserve data
+| * 910d364 The my sql data is created and drop every time the application is run to aid development
+| * 146f2a2 Created and implemented model mapper and removed old mapper utils
+| * ca00cf5 Updated application properties to production settings
+| * 9579500 Generated toString, hashCode and equals for vehicle dto
+| * 0929495 Created test case for addVehicle function in vehicle service
+| * 2c07bc5 Created and implemented application properties for production and test database
+| * 29da52c Implemented data transfer objects for vehicle
+| * 8e2f208 Created mapper classes for implementing data transfer objects
+| * af7174d Implemented form submit to create new vehicle record in the database
+| * adcc1d0 Added id to the form element
+| * 9bc9a01 Changed horse power input from type text to number
+| * e2e504b Created html form for creating a new vehicle in the system
+| * e67609e Added my sql dependancy and updated application properties to connect to the database
+| * 2b1396c Updated application properties to connect to local mysql instance
+| * 24c6f00 Implemented add vehicle in the vehicle controller
+| * ffc092e Created new vehicle controller class not yet implemented
+| * e42a1e9 Implemented create vehicle service
+| * d7890c3 Created new vehicle repository interface not yet implemented
+| * 445935a Created new vehicle service class not yet implemented
+| * 793d0fa Created vehicle domain class to match vehicle table in database
+|/  
+* 7008d31 First commit
